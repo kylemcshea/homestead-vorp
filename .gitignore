@@ -1,0 +1,8 @@
+**/\[CFX\]/**
+cache
+CFX-files/*
+perms.cfg
+server.cfg
+vorp_perms.cfg
+txData
+.replxx_history
