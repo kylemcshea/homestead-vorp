@@ -319,6 +319,8 @@ end, false)
 
 ----------- spawn an animal to make tests ------------------
 
+-- TODO: remove hunt command upon live release.
+
 RegisterCommand("hunt", function(source, args, rawCommand)
     local animal = args[1]
     local freeze = args[2]

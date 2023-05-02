@@ -1,15 +1,8 @@
-
-
-
-
 TriggerEvent("getCore",function(core)
     VorpCore = core
 end)
 
 VorpInv = exports.vorp_inventory:vorp_inventoryApi()
-
-
-
 
 RegisterServerEvent('vorp_barbershop:getinfo')
 AddEventHandler('vorp_barbershop:getinfo', function()
