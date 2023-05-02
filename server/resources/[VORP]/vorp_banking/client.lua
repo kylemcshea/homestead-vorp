@@ -279,7 +279,7 @@ function Openbank(bankName, index)
                     type = "enableinput", -- don't touch
                     inputType = "input", -- input type
                     button = "Confirm", -- button name
-                    placeholder = "insertamount", -- placeholder name
+                    placeholder = "Cash Amount", -- placeholder name
                     style = "block", -- don't touch
                     attributes = {
                         inputHeader = "DEPOSIT CASH", -- header
@@ -306,7 +306,7 @@ function Openbank(bankName, index)
                     type = "enableinput", -- don't touch
                     inputType = "input", -- input type
                     button = "Confirm", -- button name
-                    placeholder = "insertamount", -- placeholder name
+                    placeholder = "Gold Amount", -- placeholder name
                     style = "block", -- don't touch
                     attributes = {
                         inputHeader = "DEPOSIT GOLD", -- header
@@ -333,7 +333,7 @@ function Openbank(bankName, index)
                     type = "enableinput", -- don't touch
                     inputType = "input", -- input type
                     button = "Confirm", -- button name
-                    placeholder = "insertamount", -- placeholder name
+                    placeholder = "Cash Amount", -- placeholder name
                     style = "block", -- don't touch
                     attributes = {
                         inputHeader = "WITHDRAW CASH", -- header
@@ -360,7 +360,7 @@ function Openbank(bankName, index)
                     type = "enableinput", -- don't touch
                     inputType = "input", -- input type
                     button = "Confirm", -- button name
-                    placeholder = "insertamount", -- placeholder name
+                    placeholder = "Gold Amount", -- placeholder name
                     style = "block", -- don't touch
                     attributes = {
                         inputHeader = "WITHDRAW GOLD", -- header
@@ -402,7 +402,7 @@ function Openbank(bankName, index)
                     type = "enableinput", -- don't touch
                     inputType = "input", -- input type
                     button = "Confirm", -- button name
-                    placeholder = "insertamount", -- placeholder name
+                    placeholder = "Amount of Slots", -- placeholder name
                     style = "block", -- don't touch
                     attributes = {
                         inputHeader = "UP SLOTS", -- header
