@@ -39,7 +39,6 @@ RegisterNUICallback('taskEnd', function(data, cb)
     closeNormalGui()
     if (tonumber(data.taskResult) < (chance + 20) and tonumber(data.taskResult) > (chance))  then
         activeTasks = 3
-        --TriggerEvent("notification","Success!")
         factor = 1.0
     else
         FactorFunction(false)
