@@ -138,7 +138,6 @@ function SpawnHorse(x, y, z, h)
     end
 
     local myHorse = Citizen.InvokeNative(0xD49F9B0955C367DE, model, x, y, z, h, true, true, true, true)
-    --print(myHorse)
     SetModelAsNoLongerNeeded(model)
     Citizen.InvokeNative(0x283978A15512B2FE, myHorse, true)
     Citizen.InvokeNative(0xD3A7B003ED343FD9, myHorse, 0xD97573C1, true, true, true) --saddle
