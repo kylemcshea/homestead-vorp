@@ -4,11 +4,9 @@ AddEventHandler("playerSpawned", function(spawnInfo)
     local playerPed = GetPlayerPed(PlayerId())
     Wait(40000)
     if Config.ResetInnerCore then
-        --print("reset inner core")
         Citizen.InvokeNative(0xC6258F41D86676E0, playerPed, 0, 1) -- SetAttributeCoreValue
     end
     if Config.DisableRecharge then
-        --print("disable recharge")
         Citizen.InvokeNative(0xDE1B1907A83A1550, playerPed, 0) --SetHealthRechargeMultiplier
     end
 
@@ -72,7 +70,6 @@ function SendJob(isMedic, isHerbalist)
     IsMedic = isMedic
     IsHerbalist = isHerbalist
     if IsMedic or IsHerbalist then
-        --print(jobSet)
         if not jobSet then
             jobSet = true
             AddBlips()
@@ -196,7 +193,6 @@ function MedHealPlayerOuter(percent)
     else
         PlayAnim(DoctorPed, "mech_inventory@item@stimulants@inject@quick", "quick_stimulant_inject_rhand")
         SetEntityHealth(DoctorPed, 500)
-        --Citizen.InvokeNative(0xC6258F41D86676E0, DoctorPed, 0, 1)
     end
 end
 
@@ -232,7 +228,6 @@ function MedRessurectPlayer()
         TriggerServerEvent("vorpMed:resurrectPlayer", id)
     else
         TriggerEvent("vorp:Tip", _U("NoDeadPlayer"), 5000)
-        --Wait(1)
         TriggerServerEvent("vorpMed:giveBack", "syringe", 1)
     end
 end
@@ -240,7 +235,6 @@ end
 -------------------------------------------------------
 -------------------- At locations ---------------------
 function Medics()
-    --GetJob()
     if IsMedic then
         for k, v in pairs(Config.Locations) do
             local Office = vector3(v.x, v.y, v.z)
