@@ -189,24 +189,6 @@ function OpenCharCreationMenu(clothingtable)
                         menu.refresh()
                     end
                 end)
-
-                -- local MyInput = {
-                --     type = "enableinput",
-                --     inputType = "input",
-                --     button = T.Inputs.confirm,
-                --     placeholder = T.Inputs.placeholder,
-                --     style = "block",
-                --     attributes = {
-                --         inputHeader = T.Inputs.inputHeader,
-                --         type = "text",
-                --         pattern = "[A-Za-z ]{5,20}",
-                --         title = T.Inputs.title,
-                --         style = "border-radius: 10px; background-color: ; border:none;"
-                --     }
-                -- }
-                -- TriggerEvent("vorpinputs:advancedInput", json.encode(MyInput), function(result)
-                --     local Result = tostring(result)
-                -- end)
             end
 
             if (data.current.value == "save") then
@@ -1680,7 +1662,7 @@ function createCharacterName(cb)
         closeThread = true
         local str_result = tostring(first_name_result)
         if str_result == nil or str_result == "" then
-            cb(nil)
+            return cb(nil)
         end
         myFirstName = str_result
     end)
