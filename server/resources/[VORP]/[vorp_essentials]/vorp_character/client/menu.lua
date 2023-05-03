@@ -1631,7 +1631,7 @@ local FIRST_NAME_INPUT = {
     attributes = {
         inputHeader = 'Character First Name',
         type = "text",
-        pattern = "[A-Za-z ]{1,10}",
+        pattern = "[A-Za-z ]{1,20}",
         title = T.Inputs.title,
         style = "border-radius: 10px; background-color: ; border:none;"
     }
@@ -1645,7 +1645,7 @@ local LAST_NAME_INPUT = {
     attributes = {
         inputHeader = 'Character Last Name',
         type = "text",
-        pattern = "[A-Za-z ]{1,10}",
+        pattern = "[A-Za-z ]{1,20}",
         title = T.Inputs.title,
         style = "border-radius: 10px; background-color: ; border:none;"
     }
