@@ -1661,9 +1661,15 @@ function createCharacterName(cb)
     TriggerEvent("vorpinputs:advancedInput", json.encode(FIRST_NAME_INPUT), function(first_name_result)
         closeThread = true
         local str_result = tostring(first_name_result)
-        if str_result == nil or str_result == "" then
+        if (str_result == nil or str_result == "") then
             return cb(nil)
         end
+        
+        -- check if first name is empty when replacing spaces with nothing
+        if (str_result:gsub("%s+", "") == "") then
+            return cb(nil)
+        end
+
         myFirstName = str_result
     end)
 
@@ -1677,6 +1683,11 @@ function createCharacterName(cb)
         TriggerEvent("vorpinputs:advancedInput", json.encode(LAST_NAME_INPUT), function(last_name_result)
             local str_last_name = tostring(last_name_result)
             if str_last_name == nil or str_last_name == "" then
+                return cb(nil)
+            end
+
+            -- check if last name is empty when replacing spaces with nothing
+            if (str_last_name:gsub("%s+", "") == "") then
                 return cb(nil)
             end
 
