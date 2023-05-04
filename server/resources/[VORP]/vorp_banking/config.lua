@@ -130,7 +130,8 @@ Config.banks       = {
     },
     Strawberry = {
         name = "Strawberry Bank",
-        x = -1763.7446, y= -380.8514, z= 157.7361,
+        --x = -1763.7446, y= -380.8514, z= 157.7361,
+        x = -1767.55, y = -381.33, z = 157.73,
         city = "Strawberry",
         blipsprite = -2128054417,
         blipAllowed = true,
