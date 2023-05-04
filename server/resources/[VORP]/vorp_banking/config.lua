@@ -128,6 +128,35 @@ Config.banks       = {
         },
 
     },
+    Strawberry = {
+        name = "Strawberry Bank",
+        x = -1763.7446, y= -380.8514, z= 157.7361,
+        city = "Strawberry",
+        blipsprite = -2128054417,
+        blipAllowed = true,
+        NpcAllowed = false,
+        NpcModel = "S_M_M_BankClerk_01",
+        Nx = 0.0, Ny = 0.0, Nz = 0.0, Nh = 0.0, --npc positions
+        StoreHoursAllowed = true,
+        StoreOpen = 7, -- am
+        StoreClose = 21, -- pm
+        distOpen = 1.5,
+        gold = false,
+        items = false,
+        upgrade = false,
+        costslot = 10,
+        maxslots = 50,
+
+        --------------------- ONLY 1 MUST BE TRUE or ALL 2 FALSE(no limits in bank)
+        useitemlimit = false, -- if TRUE limit only items above
+        usespecificitem = false, -- if TRUE deposit only items above
+        -----------------------------------------
+
+        itemlist = { 
+            ammorevolvernormal = 3, -- name = count
+            WEAPON_MELEE_KNIFE = 1
+        },
+    },
 }
 
 Config.Logwithdraw = ""
