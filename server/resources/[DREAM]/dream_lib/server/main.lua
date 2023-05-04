@@ -11,22 +11,24 @@ local ON_DUTY_TABLE = {} -- { [job: string] = amount: number }
 function addPlayerToJobTable(job, source)
     if (not source or not job) then return end
 
+    local _source = tostring(source)
+
     if (not ON_DUTY_TABLE[job]) then
-        ON_DUTY_TABLE[job] = { tostring(source) }
+        ON_DUTY_TABLE[job] = { _source }
         devPrint('added new job to table: ' .. job)
         return
     end
 
     for key, value in pairs(ON_DUTY_TABLE[job]) do
-        if (value == tostring(source)) then
+        if (value == _source) then
             devPrint('player is already in table')
             return
         end
     end
 
-    devPrint('adding player to table: ' .. tostring(source) .. ' ' .. tostring(job))
+    devPrint('adding player to table: ' .. _source .. ' ' .. _source)
 
-    return table.insert(ON_DUTY_TABLE[job], tostring(source))
+    return table.insert(ON_DUTY_TABLE[job], _source)
 end
 
 ---@param job: string
@@ -36,13 +38,15 @@ function removePlayerFromJobTable(job, source)
     if (not source or not job) then return end
     if (not ON_DUTY_TABLE[job]) then return end
 
+    local _source = tostring(source)
+
     local removedPlayer = false
 
     for key, value in pairs(ON_DUTY_TABLE[job]) do
-        if (value == tostring(source)) then
+        if (value == _source) then
             table.remove(ON_DUTY_TABLE[job], key)
             removedPlayer = true
-            devPrint('removed player from table: ' .. tostring(source) .. ' ' .. tostring(job))
+            devPrint('removed player from table: ' .. _source .. ' ' .. tostring(job))
             break
         end
     end
