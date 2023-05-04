@@ -10,14 +10,13 @@ local ON_DUTY_TABLE = {} -- { [job: string] = amount: number }
 ---@return void
 function addPlayerToJobTable(job, source)
     if (not source or not job) then return end
-    
+
     if (not ON_DUTY_TABLE[job]) then
         ON_DUTY_TABLE[job] = { tostring(source) }
         devPrint('added new job to table: ' .. job)
         return
     end
-    
-    -- checks ON_DUTY_TABLE[job] if source is already in there.
+
     for key, value in pairs(ON_DUTY_TABLE[job]) do
         if (value == tostring(source)) then
             devPrint('player is already in table')
@@ -106,5 +105,26 @@ end)
 if (IS_DEV_MODE) then
     RegisterCommand('job_table', function()
         devPrint('job table: ' .. json.encode(ON_DUTY_TABLE))
+    end)
+
+    RegisterCommand('test_add', function()
+        addPlayerToJobTable('police', 2)
+        addPlayerToJobTable('police', '2')
+        addPlayerToJobTable('ambulance', '1')
+        addPlayerToJobTable('ambulance', 1)
+        addPlayerToJobTable('lawman', '4')
+    end)
+
+    RegisterCommand('test_remove', function()
+        removePlayerFromJobTable('police', 2)
+        removePlayerFromJobTable('ambulance', '1')
+    end)
+
+    RegisterCommand('test_police', function()
+        print(getOnDutyCount('police'))
+    end)
+
+    RegisterCommand('test_ambulance', function()
+        print(json.encode(getOnDutyPlayers('police')))
     end)
 end

@@ -19,4 +19,4 @@ shared_scripts {
     'shared/*.lua',
 }
 
-export 'devPrint'
+server_export 'devPrint'
