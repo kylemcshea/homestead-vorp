@@ -272,6 +272,7 @@ Config.banks       = {
             ammorevolvernormal = 3, -- name = count
             WEAPON_MELEE_KNIFE = 1
         },
+    }
 }
 
 Config.Logwithdraw = ""
