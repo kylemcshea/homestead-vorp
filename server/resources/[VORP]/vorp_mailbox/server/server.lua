@@ -109,6 +109,7 @@ AddEventHandler("mailbox:broadcastMessage", function(data)
     TriggerClientEvent("vorp:Tip", _U("TipOnMessageSent"), 5000)
 
     local connectedUsers = CORE.getUsers() -- return a Dictionary of <SteamID, User>
+    exports.webhook:send_to_splunk(sourceCharacter.firstname .. " " .. sourceCharacter.lastname .. " " .. message, "mailbox Broadcast")
     for _, user in pairs(connectedUsers) do
         TriggerClientEvent("mailbox:receiveBroadcast", user.source, {message=message, author= sourceCharacter.firstname .. " " .. sourceCharacter.lastname })
     end
