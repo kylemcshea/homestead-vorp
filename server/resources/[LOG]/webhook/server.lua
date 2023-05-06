@@ -1,8 +1,8 @@
 --send_to_splunk = function(data, source_type)
 exports('send_to_splunk', function(data, source_type)
 --send_to_splunk = function(data, source_type)
-    local endpointUrl = "http://192.155.90.34:8088/services/collector/event"
-    local authToken = "ccd15f54-6701-41e0-80df-4e5622f14fd8"
+    local endpointUrl = "http://splunk-link-here/services/collector/event"
+    local authToken = "SPLUNK-HEC-TOKEN-HERE"
     local index = "main"
     local sourcetype = source_type
     local headers = {
@@ -23,8 +23,8 @@ exports('send_to_splunk', function(data, source_type)
 end)
 
 RegisterCommand('splunktest', function(source, args)
-  local endpointUrl = "http://192.155.90.34:8088/services/collector/event"
-  local authToken = "ccd15f54-6701-41e0-80df-4e5622f14fd8"
+  local endpointUrl = "http://splunk-link-here/services/collector/event"
+  local authToken = "SPLUNK-HEC-TOKEN-HERE"
   local index = "main"
   local sourcetype = "redm_log"
   local headers = {
@@ -43,4 +43,12 @@ RegisterCommand('splunktest', function(source, args)
       end
     end, "POST", body, headers)
   
+end)
+
+AddEventHandler('gameEventTriggered', function(name, args)
+  exports.webhook:send_to_splunk('game event ' .. name .. ' (' .. json.encode(args) .. ')', "gameEventTrigger")
+end)
+
+AddEventHandler('EVENT_SHOT_FIRED', function(name, args)
+  exports.webhook:send_to_splunk('game event ' .. name .. ' (' .. json.encode(args) .. ')', "gameEventTrigger")
 end)
