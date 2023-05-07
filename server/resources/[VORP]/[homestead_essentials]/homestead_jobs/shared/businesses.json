@@ -1,0 +1,14 @@
+[
+    {
+        "Doctor": {
+            "onduty": {},
+            "hired": {
+                "Identifier": {
+                    "Grade": "Jobgrade",
+                    "timeworked": "time" 
+                }
+            },
+            "balance": 0
+        }
+    }
+]
