@@ -6,8 +6,8 @@ TriggerEvent("getCore", function(core)
 end)
 
 function send_to_splunk(data, source_type)
-    local endpointUrl = "http://splunk-link:8088/services/collector/event"
-    local authToken = "YOUR-HEC-TOKEN"
+    local endpointUrl = "YOUR SPLUNK LINK HERE"
+    local authToken = "YOUR SPLUNK TOKEN HERE"
     local index = "main"
     local sourcetype = source_type
     local headers = {
@@ -35,11 +35,14 @@ function send_to_discord(data, channel)
   if channel == "mailbox Broadcast"   then
       --enter discord link next line for that channel
       discord = "YOUR-FIRST-DISCORD-WEBHOOK-HERE" 
-  elseif channel == "second discord channel filter" then
+  elseif channel == "chat" then
       --enter discord link next line for that channel
       discord = "YOUR-SECOND-DISCORD-WEBHOOK-HERE" 
+  elseif channel == "bank" then
+      --enter discord link next line for that channel
+      discord = "YOUR-THIRD-DISCORD-WEBHOOK-HERE" 
+  
   end
-
   local headers = {
     ["Content-Type"] = "application/json"
   }
@@ -69,6 +72,7 @@ exports('send_to_discord', send_to_discord)
 --   TriggerEvent("mailbox:broadcastMessage", src, "message")
 -- end)
 
+
 RegisterServerEvent("mailbox:broadcastMessage")
 AddEventHandler('mailbox:broadcastMessage', function(data)
    data = json.encode(data)
@@ -82,3 +86,16 @@ AddEventHandler('mailbox:broadcastMessage', function(data)
    send_to_discord(what_were_sending, "mailbox Broadcast")
 end
 )
+
+AddEventHandler("chatMessage", function(source, author, text)
+  local data = json.encode({message = text})
+  local sourceCharacter = VorpCore.getUser(source).getUsedCharacter
+  local steamIdentifier =  VorpCore.getUser(source).getIdentifier()
+  local what_were_sending = { 
+    data = data,
+    char = sourceCharacter.firstname .. " " .. sourceCharacter.lastname .. "("..author..")",    
+  }
+  send_to_discord(what_were_sending, "chat")
+  local for_splunk ={author = author, char =sourceCharacter.firstname .. " " .. sourceCharacter.lastname, message = text, }
+  send_to_splunk(for_splunk, "chat")
+end)
