@@ -11,4 +11,7 @@ server_script {
 
 }
 
-server_export 'send_to_splunk'
+server_export {
+	'send_to_splunk',
+	'send_to_discord'
+}
