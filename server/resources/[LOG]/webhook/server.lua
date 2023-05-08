@@ -40,8 +40,8 @@ function send_to_discord(data, channel)
       discord = "YOUR-SECOND-DISCORD-WEBHOOK-HERE" 
   elseif channel == "bank" then
       --enter discord link next line for that channel
-      discord = "YOUR-THIRD-DISCORD-WEBHOOK-HERE" 
-  
+ elseif channel == "inventory" then
+      --enter discord link next line for that channel
   end
   local headers = {
     ["Content-Type"] = "application/json"
@@ -86,6 +86,12 @@ AddEventHandler('mailbox:broadcastMessage', function(data)
    send_to_discord(what_were_sending, "mailbox Broadcast")
 end
 )
+
+RegisterServerEvent("vorpCoreClient:addItem")
+AddEventHandler("vorpCoreClient:addItem", function(_source, item)
+  local what_were_sending = {source = _source, item=item}
+  send_to_splunk(what_were_sending,"inventory")
+end)
 
 AddEventHandler("chatMessage", function(source, author, text)
   local data = json.encode({message = text})

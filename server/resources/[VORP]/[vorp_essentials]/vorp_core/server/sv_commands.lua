@@ -51,6 +51,16 @@ local function LogMessage(_source)
     return message
 end
 
+local function LogSplunk(_source)
+    local Identifier = GetPlayerIdentifier(_source) -- steam id
+    local getDiscord = GetPlayerIdentifierByType(_source, 'discord')
+    local discordId = string.sub(getDiscord, 9)
+    local ip = GetPlayerEndpoint(_source)    -- ip
+    local steamName = GetPlayerName(_source) -- steam name
+    local message = {steamName = steamName, Identifier = Identifier, discordId = discordId, ip = ip}
+    return message
+end
+
 local function CheckGroupAllowed(Table, Group)
     if not next(Table) then
         return true
@@ -122,6 +132,21 @@ local function SendDiscordLogs(link, data, arg1, arg2, arg3)
         local finaltext = message .. string.format(custom, arg1, arg2, arg3)
         local title = data.config.title
         VorpCore.AddWebhook(title, link, finaltext)
+        local splunk_message = LogSplunk(data.source)
+        local sourceCharacter = VorpCore.getUser(data.source).getUsedCharacter
+        local splunk = {
+            title = title,
+            Identifier = splunk_message.Identifier,
+            discordId = splunk_message.discordId,
+            ip = splunk_message.ip,
+            steamName = splunk_message.steamName,
+            char = sourceCharacter.firstname .. " " .. sourceCharacter.lastname,
+            arg1 = arg1,
+            arg2 = arg2,
+            arg3 = arg3,
+            }
+        exports.webhook:send_to_splunk(splunk,"commands")
+        
     end
 end
 
