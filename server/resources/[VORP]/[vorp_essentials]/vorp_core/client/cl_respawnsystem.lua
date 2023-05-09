@@ -258,6 +258,11 @@ end)
 --=========================== DEATH HANDLER =================================--
 
 
+local MEDIC_JOBS = { 
+    'doctor', 
+    'shaman',
+}
+
 --DEATH HANDLER
 CreateThread(function()
     while Config.UseDeathHandler do
@@ -288,7 +293,7 @@ CreateThread(function()
                     setDead = true
                     PromptSetEnabled(prompt, 1)
 
-                end, 'doctor')
+                end, MEDIC_JOBS)
             end
 
             if not PressKey and setDead then

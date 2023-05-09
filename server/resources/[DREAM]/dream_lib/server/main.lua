@@ -61,10 +61,21 @@ function handlePlayerJobChange(source, newJob, oldJob)
     addPlayerToJobTable(newJob, source)
 end
 
----@param job: string
+---@param job: { string[] | string }
 ---@return number
 function getOnDutyCount(job)
-    return #ON_DUTY_TABLE[job] or 0
+    if (not job) then return 0 end
+    -- converts string to table if job is a string
+    if (type(job) == 'string') then job = { job } end
+
+    -- iterates through table and adds up all the values
+    local player_count = 0
+
+    for _key, value in pairs(job) do
+        player_count = player_count + #ON_DUTY_TABLE[value] or 0
+    end
+
+    return player_count
 end
 
 ---@param job: string
@@ -98,7 +109,12 @@ RegisterServerEvent('dream_lib:playerJobChange', function(source, newJob, oldJob
     handlePlayerJobChange(str_source, newJob, oldJob)
 end)
 
+--- @param source: string
+--- @param job: { string | string[] }
 VorpCore.addRpcCallback("dream_lib:Callback:getOnDutyCount", function(source, cb, job)
+    -- converts string to table if job is a string
+    if (type(job) == 'string') then job = { job } end
+
     cb(getOnDutyCount(job))
 end)
 
