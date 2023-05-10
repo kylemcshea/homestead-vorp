@@ -36,7 +36,7 @@ function DataBase()
                 _G[data.trigger]()
             end
             if data.current.value == "players" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.OpenDatabase")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.OpenDatabase")
                 Wait(100)
                 if AdminAllowed then
                     DatabasePlayers(data.current.PlayerData)
@@ -69,7 +69,7 @@ function DatabasePlayers(PlayerData)
                 _G[data.trigger]()
             end
             if data.current.value == "give" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.OpenGiveMenu")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.OpenGiveMenu")
                 Wait(100)
                 if AdminAllowed then
                     GivePlayers(PlayerData)
@@ -78,7 +78,7 @@ function DatabasePlayers(PlayerData)
                 end
             end
             if data.current.value == "remove" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.OpenRemoveMenu")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.OpenRemoveMenu")
                 Wait(100)
                 if AdminAllowed then
                     RemovePlayers(PlayerData)
@@ -106,15 +106,10 @@ function GivePlayers(PlayerData)
         { label = _U("GiveWeapons"), value = 'addWeapon',
             desc = _U("giveweapon_desc") .. "<span style=color:MediumSeaGreen;>" .. PlayerData.PlayerName,
             info = PlayerData.serverId },
-        { label = _U("GiveMoney"), value = 'addMoney',
+        { label = _U("GiveMoneyGold"), value = 'addMoneygold',
             desc = _U("givemoney_desc") ..
                 "<span style=color:MediumSeaGreen;>" ..
-                PlayerData.PlayerName .. "</span><br><span>Be sure to input Quantity</span>",
-            info = PlayerData.serverId },
-        { label = _U("GiveGold"), value = 'addGold',
-            desc = _U("givegold_desc") ..
-                "<span style=color:MediumSeaGreen;>" ..
-                PlayerData.PlayerName .. "</span><br><span>Be sure to input Quantity</span>",
+                PlayerData.PlayerName .. "</span><br><span> 0 FOR CASH 1 FOR GOLD THEN QUANTITY</span>",
             info = PlayerData.serverId },
         { label = _U("GiveHorse"), value = 'addHorse',
             desc = _U("givehorse_desc") .. "<span style=color:MediumSeaGreen;>" .. PlayerData.PlayerName .. "</span>",
@@ -137,7 +132,7 @@ function GivePlayers(PlayerData)
                 _G[data.trigger]()
             end
             if data.current.value == "addItem" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.Giveitems")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.Giveitems")
                 Wait(100)
                 if AdminAllowed then
                     local targetID = data.current.info
@@ -179,7 +174,7 @@ function GivePlayers(PlayerData)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "addWeapon" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.GiveWeapons")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.GiveWeapons")
                 Wait(100)
                 if AdminAllowed then
                     local targetID = data.current.info
@@ -215,24 +210,52 @@ function GivePlayers(PlayerData)
                 else
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
-            elseif data.current.value == "addMoney" then
+            elseif data.current.value == "addMoneygold" then
                 TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.GiveCurrency")
                 Wait(100)
                 if AdminAllowed then
-                    -- TODO: allow for user to input money amount and send it over
-                else
-                    TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
-                end
-            elseif data.current.value == "addGold" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.GiveCurrency")
-                Wait(100)
-                if AdminAllowed then
-                    -- TODO: allow for user to input gold amount and send it over
+                    local targetID = data.current.info
+                    local type = "moneygold"
+                    local myInput = {
+                        type = "enableinput", -- dont touch
+                        inputType = "input",
+                        button = _U("confirm"), -- button name
+                        placeholder = "CURRENCY QUANTITY", --placeholdername
+                        style = "block", --- dont touch
+                        attributes = {
+                            inputHeader = "GIVE CURRENCY", -- header
+                            type = "text", -- inputype text, number,date.etc if number comment out the pattern
+                            pattern = "[0-9 ]{1,20}", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
+                            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
+                            style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
+                        }
+                    }
+
+                    TriggerEvent("vorpinputs:advancedInput", json.encode(myInput), function(cb)
+                        local result = tostring(cb)
+                        if result ~= "" then
+                            local splitString = {}
+                            for i in string.gmatch(result, "%S+") do
+                                splitString[#splitString + 1] = i
+                            end
+                            local moneyType, Quantity = tonumber(splitString[1]), tonumber(splitString[2])
+                            TriggerServerEvent("vorp_admin:givePlayer", targetID, type, moneyType, Quantity)
+                            if Config.DatabaseLogs.Givecurrency then
+                                TriggerServerEvent("vorp_admin:logs", Config.DatabaseLogs.Givecurrency,
+                                    _U("titledatabase")
+                                    , _U("usedgivecurrency") ..
+                                    "\nPlayer: " .. PlayerData.PlayerName .. "\ntype: " .. moneyType ..
+                                    "\nQTY: " .. Quantity)
+                            end
+                        else
+                            TriggerEvent("vorp:TipRight", _U("empty"), 4000)
+                        end
+                    end)
                 else
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "addHorse" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.GiveHorse")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.GiveHorse")
                 Wait(100)
                 if AdminAllowed then
                     local targetID = data.current.info
@@ -274,7 +297,7 @@ function GivePlayers(PlayerData)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "addWagon" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.GiveWagons")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.GiveWagons")
                 Wait(100)
                 if AdminAllowed then
                     local targetID = data.current.info
@@ -316,7 +339,7 @@ function GivePlayers(PlayerData)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "inventory" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.ShowInvGive")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.ShowInvGive")
                 Wait(100)
                 if AdminAllowed then
                     local TargetID = data.current.info
@@ -372,7 +395,7 @@ function RemovePlayers(PlayerData)
                 _G[data.trigger]()
             end
             if data.current.value == "clearmoney" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.RemoveAllMoney")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.RemoveAllMoney")
                 Wait(100)
                 if AdminAllowed then
                     local targetID = data.current.info
@@ -387,7 +410,7 @@ function RemovePlayers(PlayerData)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "cleargold" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.RemoveAllGold")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.RemoveAllGold")
                 Wait(100)
                 if AdminAllowed then
                     local targetID = data.current.info
@@ -402,7 +425,7 @@ function RemovePlayers(PlayerData)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "clearitems" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.RemoveAllItems")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.RemoveAllItems")
                 Wait(100)
                 if AdminAllowed then
                     local targetID = data.current.info
@@ -442,7 +465,7 @@ function RemovePlayers(PlayerData)
                 end
 
             elseif data.current.value == "clearweapons" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.RemoveAllWeapons")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.RemoveAllWeapons")
                 Wait(100)
                 if AdminAllowed then
                     local targetID = data.current.info
@@ -482,7 +505,7 @@ function RemovePlayers(PlayerData)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "showinventory" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.ShowInvRemove")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.ShowInvRemove")
                 Wait(100)
                 if AdminAllowed then
                     local TargetID = data.current.info
