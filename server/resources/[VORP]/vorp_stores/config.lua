@@ -191,7 +191,7 @@ Config.Stores = {
         PromptName = "general store",
         sprite = 1475879922,
         x = 3025.420, y = 561.7910, z = 43.722, h = -99.20,
-        distanceOpenStore = 3,
+        distanceOpenStore = 3.0,
         NpcAllowed = true,
         NpcModel = "U_M_M_NbxGeneralStoreOwner_01",
         AllowedJobs = {}, -- jobs allowed
