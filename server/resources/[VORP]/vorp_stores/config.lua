@@ -239,7 +239,7 @@ Config.Stores = {
         PromptName = "Native store",
         sprite = 1475879922,
         x = 449.7435, y = 2216.437, z = 245.30, h = -73.78,
-        distanceOpenStore = 3,
+        distanceOpenStore = 3.0,
         NpcAllowed = true,
         NpcModel = "CS_EagleFlies",
         AllowedJobs = {}, -- jobs allowed
