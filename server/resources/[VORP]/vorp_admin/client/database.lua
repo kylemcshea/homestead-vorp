@@ -106,10 +106,15 @@ function GivePlayers(PlayerData)
         { label = _U("GiveWeapons"), value = 'addWeapon',
             desc = _U("giveweapon_desc") .. "<span style=color:MediumSeaGreen;>" .. PlayerData.PlayerName,
             info = PlayerData.serverId },
-        { label = _U("GiveMoneyGold"), value = 'addMoneygold',
+        { label = _U("GiveMoney"), value = 'addMoney',
             desc = _U("givemoney_desc") ..
                 "<span style=color:MediumSeaGreen;>" ..
-                PlayerData.PlayerName .. "</span><br><span> 0 FOR CASH 1 FOR GOLD THEN QUANTITY</span>",
+                PlayerData.PlayerName .. "</span><br><span>Be sure to input Quantity</span>",
+            info = PlayerData.serverId },
+        { label = _U("GiveGold"), value = 'addGold',
+            desc = _U("givegold_desc") ..
+                "<span style=color:MediumSeaGreen;>" ..
+                PlayerData.PlayerName .. "</span><br><span>Be sure to input Quantity</span>",
             info = PlayerData.serverId },
         { label = _U("GiveHorse"), value = 'addHorse',
             desc = _U("givehorse_desc") .. "<span style=color:MediumSeaGreen;>" .. PlayerData.PlayerName .. "</span>",
@@ -210,50 +215,21 @@ function GivePlayers(PlayerData)
                 else
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
-            elseif data.current.value == "addMoneygold" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.GiveCurrency")
+            elseif data.current.value == "addMoney" or data.current.value == "addGold" then
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.GiveCurrency")
                 Wait(100)
-                if AdminAllowed then
-                    local targetID = data.current.info
-                    local type = "moneygold"
-                    local myInput = {
-                        type = "enableinput", -- dont touch
-                        inputType = "input",
-                        button = _U("confirm"), -- button name
-                        placeholder = "CURRENCY QUANTITY", --placeholdername
-                        style = "block", --- dont touch
-                        attributes = {
-                            inputHeader = "GIVE CURRENCY", -- header
-                            type = "text", -- inputype text, number,date.etc if number comment out the pattern
-                            pattern = "[0-9 ]{1,20}", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
-                            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
-                            style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
-                        }
-                    }
-
-                    TriggerEvent("vorpinputs:advancedInput", json.encode(myInput), function(cb)
-                        local result = tostring(cb)
-                        if result ~= "" then
-                            local splitString = {}
-                            for i in string.gmatch(result, "%S+") do
-                                splitString[#splitString + 1] = i
-                            end
-                            local moneyType, Quantity = tonumber(splitString[1]), tonumber(splitString[2])
-                            TriggerServerEvent("vorp_admin:givePlayer", targetID, type, moneyType, Quantity)
-                            if Config.DatabaseLogs.Givecurrency then
-                                TriggerServerEvent("vorp_admin:logs", Config.DatabaseLogs.Givecurrency,
-                                    _U("titledatabase")
-                                    , _U("usedgivecurrency") ..
-                                    "\nPlayer: " .. PlayerData.PlayerName .. "\ntype: " .. moneyType ..
-                                    "\nQTY: " .. Quantity)
-                            end
-                        else
-                            TriggerEvent("vorp:TipRight", _U("empty"), 4000)
-                        end
-                    end)
-                else
-                    TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
+                if (not AdminAllowed) then
+                    return TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
+
+                -- targetID: string
+                -- moneyType: 'money' | 'gold'
+                local targetData = {
+                    targetID = data.current.info,
+                    moneyType = data.current.value == "addMoney" and "money" or "gold"
+                }
+
+                giveCurrencyToPlayer(targetData)
             elseif data.current.value == "addHorse" then
                 TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.GiveHorse")
                 Wait(100)
@@ -548,4 +524,43 @@ function OpenInvnetory(inventorydata)
             menu.close()
         end)
 
+end
+
+---@param targetData: { targetID: string, moneyType: 'money' | 'gold' }
+---@return void
+function giveCurrencyToPlayer(targetData)
+    local targetID = targetData.targetID
+    local myInput = {
+        type = "enableinput", -- dont touch
+        inputType = "input",
+        button = _U("confirm"), -- button name
+        placeholder = "CURRENCY QUANTITY", --placeholdername
+        style = "block", --- dont touch
+        attributes = {
+            inputHeader = "CURRENCY AMOUNT", -- header
+            type = "number", -- inputype text, number,date.etc if number comment out the pattern
+            pattern = "[0-9]{1,20}", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
+            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
+            style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
+        }
+    }
+
+    TriggerEvent("vorpinputs:advancedInput", json.encode(myInput), function(response)
+        local result = tostring(response)
+
+        if (not result or result == "") then
+            return TriggerEvent("vorp:TipRight", _U("empty"), 4000)
+        end
+
+        local moneyType, Quantity =  targetData.moneyType === 'money' and 0 or 1, result
+
+        TriggerServerEvent("vorp_admin:givePlayer", targetID, 'moneygold', moneyType, Quantity)
+        if Config.DatabaseLogs.Givecurrency then
+            TriggerServerEvent("vorp_admin:logs", Config.DatabaseLogs.Givecurrency,
+                _U("titledatabase")
+                , _U("usedgivecurrency") ..
+                "\nPlayer: " .. PlayerData.PlayerName .. "\ntype: " .. moneyType ..
+                "\nQTY: " .. Quantity)
+        end
+    end)
 end
