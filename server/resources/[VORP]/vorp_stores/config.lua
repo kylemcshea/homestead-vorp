@@ -215,7 +215,7 @@ Config.Stores = {
         PromptName = "fishing store",
         sprite = 3442726182,
         x = -757.069, y = -1360.76, z = 43.724, h = -90.80,
-        distanceOpenStore = 3,
+        distanceOpenStore = 3.0,
         NpcAllowed = false,
         NpcModel = "U_M_M_NbxGeneralStoreOwner_01",
         AllowedJobs = {}, -- jobs allowed
