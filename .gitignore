@@ -9,3 +9,5 @@ server.cfg
 vorp_perms.cfg
 txData
 .replxx_history
+start_6431_default.bat
+server/resources/[VORP]/vorp_postman/Newtonsoft.Json.dll
