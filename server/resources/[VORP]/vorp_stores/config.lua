@@ -50,7 +50,7 @@ Config.Stores = {
         distanceOpenStore = 5.0,
         NpcAllowed = true,
         NpcModel = "S_M_M_UNIBUTCHERS_01",
-        AllowedJobs = { "police", "sheriff" }, -- jobs allowed as many as you want
+        AllowedJobs = {}, -- jobs allowed as many as you want
         JobGrade = 0,
         category = { "food", "tools", "meds" },
         storeType = { "buy", "sell" },
@@ -143,7 +143,7 @@ Config.Stores = {
         PromptName = "general store",
         sprite = 1475879922,
         x = -5485.70, y = -2938.08, z = -0.299, h = 127.72,
-        distanceOpenStore = 3.0,
+        distanceOpenStore = 2.5,
         NpcAllowed = true,
         NpcModel = "U_M_M_NbxGeneralStoreOwner_01",
         AllowedJobs = {}, -- jobs allowed
@@ -167,7 +167,7 @@ Config.Stores = {
         PromptName = "general store",
         sprite = 1475879922,
         x = 2824.863, y = -1319.74, z = 45.755, h = -39.61,
-        distanceOpenStore = 2.0,
+        distanceOpenStore = 3.0,
         NpcAllowed = true,
         NpcModel = "U_M_M_NbxGeneralStoreOwner_01",
         AllowedJobs = {}, -- jobs allowed
@@ -191,7 +191,7 @@ Config.Stores = {
         PromptName = "general store",
         sprite = 1475879922,
         x = 3025.420, y = 561.7910, z = 43.722, h = -99.20,
-        distanceOpenStore = 2.5,
+        distanceOpenStore = 3,
         NpcAllowed = true,
         NpcModel = "U_M_M_NbxGeneralStoreOwner_01",
         AllowedJobs = {}, -- jobs allowed
@@ -215,7 +215,7 @@ Config.Stores = {
         PromptName = "fishing store",
         sprite = 3442726182,
         x = -757.069, y = -1360.76, z = 43.724, h = -90.80,
-        distanceOpenStore = 2.5,
+        distanceOpenStore = 3,
         NpcAllowed = false,
         NpcModel = "U_M_M_NbxGeneralStoreOwner_01",
         AllowedJobs = {}, -- jobs allowed
@@ -239,7 +239,7 @@ Config.Stores = {
         PromptName = "Native store",
         sprite = 1475879922,
         x = 449.7435, y = 2216.437, z = 245.30, h = -73.78,
-        distanceOpenStore = 2.5,
+        distanceOpenStore = 3,
         NpcAllowed = true,
         NpcModel = "CS_EagleFlies",
         AllowedJobs = {}, -- jobs allowed
