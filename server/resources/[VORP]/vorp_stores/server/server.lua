@@ -51,7 +51,6 @@ AddEventHandler('vorp_stores:sell', function(label, name, type, price, qty, stor
                     if items.amount >= quantity then
                         sellItems(_source,Character,ItemName,quantity,ItemLabel,total,total2,currencyType)
                         items.amount = items.amount-quantity --update amount left for store
-                        exports.webhook:send_to_splunk({_source = _source, char = Character, itemName = ItemName, quanity = quantity, ItemLabel = ItemLabel, total = total, total2 = total2, currencyType = currencyType},"sell")
                     else
                         VORPcore.NotifyRightTip( _source, _U("limitSell"), 3000)
                     end
