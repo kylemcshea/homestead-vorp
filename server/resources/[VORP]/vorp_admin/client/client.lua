@@ -35,7 +35,7 @@ AddEventHandler("onClientResourceStart", function(resourceName)
     -- AdminAllowed = false
     -- local player = GetPlayerServerId(tonumber(PlayerId()))
     -- Wait(100)
-    -- TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.OpenMenu")
+    -- TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.OpenMenu")
     -- TriggerServerEvent("vorp_admin:getStaffInfo", player)
 end)
 
@@ -43,7 +43,7 @@ RegisterNetEvent('vorp:SelectedCharacter', function()
     AdminAllowed = false
     local player = GetPlayerServerId(tonumber(PlayerId()))
     Wait(100)
-    TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.OpenMenu")
+    TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.OpenMenu")
     TriggerServerEvent("vorp_admin:getStaffInfo", player)
 end)
 
@@ -55,7 +55,7 @@ local function CanOpenUsersMenu()
 end
 
 local function OpenAdminMenu()
-    TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.OpenMenu")
+    TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.OpenMenu")
     Wait(100)
     if AdminAllowed then
         OpenMenu()
@@ -88,7 +88,7 @@ end)
 
 -- perms
 
-RegisterNetEvent("vorp_admin:OpenStaffMenu", function(perm)
+RegisterNetEvent("vorp_admin:openStaffMenu", function(perm)
     AdminAllowed = perm
 end)
 

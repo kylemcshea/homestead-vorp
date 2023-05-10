@@ -26,7 +26,7 @@ function Admin()
                 _G[data.trigger]()
             end
             if data.current.value == "players" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.PlayersList')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.PlayersList')
                 Wait(100)
 
                 if AdminAllowed then
@@ -35,7 +35,7 @@ function Admin()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "actions" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.AdminActions')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.AdminActions')
                 Wait(100)
                 if AdminAllowed then
                     Actions()
@@ -43,7 +43,7 @@ function Admin()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "offline" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.OfflineActions')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.OfflineActions')
                 Wait(100)
                 if AdminAllowed then
                     OffLine()
@@ -51,7 +51,7 @@ function Admin()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "view" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.ViewReports')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.ViewReports')
                 Wait(100)
                 if AdminAllowed then
                     TriggerEvent("vorp_admin:viewreports")
@@ -168,7 +168,7 @@ function PlayerList()
                 _G[data.trigger]()
             end
             if data.current.value then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.PlayersListSubmenu')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.PlayersListSubmenu')
                 Wait(100)
                 if AdminAllowed then
                     local player = data.current.info
@@ -203,7 +203,7 @@ function OpenSubAdminMenu(Player)
                 _G[data.trigger]()
             end
             if data.current.value == "simpleaction" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.OpenSimpleActions')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.OpenSimpleActions')
                 Wait(100)
                 if AdminAllowed then
                     OpenSimpleActionMenu(Player)
@@ -211,7 +211,7 @@ function OpenSubAdminMenu(Player)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "advancedaction" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.OpenAdvancedActions')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.OpenAdvancedActions')
                 Wait(100)
                 if AdminAllowed then
                     OpenAdvancedActions(Player)
@@ -219,7 +219,7 @@ function OpenSubAdminMenu(Player)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == 'trollactions' then
-                TriggerServerEvent('vorp_admin:opneStaffMenu', 'vorp.staff.OpenTrollActions')
+                TriggerServerEvent('vorp_admin:openStaffMenu', 'vorp.staff.OpenTrollActions')
                 Wait(100)
                 if AdminAllowed then
                     OpenTrollActions(Player)
@@ -278,55 +278,55 @@ function OpenTrollActions(PlayerInfo)
                 _G[data.trigger]()
             end
             if data.current.value == 'killplayer' then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.KillPlayer')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.KillPlayer')
                 Wait(100)
                 if AdminAllowed then
                     TriggerServerEvent('vorp_admin:ServerTrollKillPlayerHandler', data.current.info)
                 end
             elseif data.current.value == 'invisplayer' then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.InvisPlayer')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.InvisPlayer')
                 Wait(100)
                 if AdminAllowed then
                     TriggerServerEvent('vorp_admin:ServerTrollInvisibleHandler', data.current.info)
                 end
             elseif data.current.value == 'lightningstrikeplayer' then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.LightningStrikePlayer')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.LightningStrikePlayer')
                 Wait(100)
                 if AdminAllowed then
                     TriggerServerEvent('vorp_admin:ServerTrollLightningStrikePlayerHandler', data.current.info)
                 end
             elseif data.current.value == 'setplayeronfire' then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.SetPlayerOnFire')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.SetPlayerOnFire')
                 Wait(100)
                 if AdminAllowed then
                     TriggerServerEvent('vorp_admin:ServerTrollSetPlayerOnFireHandler', data.current.info)
                 end
             elseif data.current.value == 'tptoheaven' then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.TPToHeaven')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.TPToHeaven')
                 Wait(100)
                 if AdminAllowed then
                     TriggerServerEvent('vorp_admin:ServerTrollTPToHeavenHandler', data.current.info)
                 end
             elseif data.current.value == 'ragdollplayer' then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.RagdollPlayer')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.RagdollPlayer')
                 Wait(100)
                 if AdminAllowed then
                     TriggerServerEvent('vorp_admin:ServerTrollRagdollPlayerHandler', data.current.info)
                 end
             elseif data.current.value == 'drainplayerstam' then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.DrainPlayerStam')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.DrainPlayerStam')
                 Wait(100)
                 if AdminAllowed then
                     TriggerServerEvent('vorp_admin:ServerDrainPlayerStamHandler', data.current.info)
                 end
             elseif data.current.value == 'cuffplayer' then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.CuffPlayer')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.CuffPlayer')
                 Wait(100)
                 if AdminAllowed then
                     TriggerServerEvent('vorp_admin:ServerHandcuffPlayerHandler', data.current.info)
                 end
             elseif data.current.value == 'temphighplayer' then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.PlayerTempHigh')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.PlayerTempHigh')
                 Wait(100)
                 if AdminAllowed then
                     TriggerServerEvent('vorp_admin:ServerTempHighPlayerHandler', data.current.info)
@@ -388,7 +388,7 @@ function OpenSimpleActionMenu(PlayerInfo)
             end
             if data.current.value == "freeze" then
                 local target = data.current.info
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Frezee')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Frezee')
                 Wait(100)
 
                 if AdminAllowed then
@@ -412,7 +412,7 @@ function OpenSimpleActionMenu(PlayerInfo)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "bring" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Bring')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Bring')
                 Wait(100)
 
                 if AdminAllowed then
@@ -435,7 +435,7 @@ function OpenSimpleActionMenu(PlayerInfo)
                     TriggerServerEvent("vorp_admin:TeleportPlayerBack", target)
                 end
             elseif data.current.value == "goto" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.GoTo')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.GoTo')
                 Wait(100)
 
                 if AdminAllowed then
@@ -455,7 +455,7 @@ function OpenSimpleActionMenu(PlayerInfo)
                     TriggerServerEvent("vorp_admin:sendAdminBack")
                 end
             elseif data.current.value == "revive" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Revive')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Revive')
                 Wait(100)
 
                 if AdminAllowed then
@@ -470,7 +470,7 @@ function OpenSimpleActionMenu(PlayerInfo)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "heal" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Heal')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Heal')
                 Wait(100)
 
                 if AdminAllowed then
@@ -485,7 +485,7 @@ function OpenSimpleActionMenu(PlayerInfo)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "warn" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Warn')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Warn')
                 Wait(100)
 
                 if AdminAllowed then
@@ -516,7 +516,7 @@ function OpenSimpleActionMenu(PlayerInfo)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "unwarn" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.UnWarn')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.UnWarn')
                 Wait(100)
 
                 if AdminAllowed then
@@ -533,7 +533,7 @@ function OpenSimpleActionMenu(PlayerInfo)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "spectate" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Spectate')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Spectate')
                 Wait(100)
 
                 if AdminAllowed then
@@ -600,7 +600,7 @@ function OpenAdvancedActions(Player)
             end
 
             if data.current.value == "respawn" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Respawn')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Respawn')
                 Wait(100)
 
                 if AdminAllowed then
@@ -615,7 +615,7 @@ function OpenAdvancedActions(Player)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "kick" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Kick')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Kick')
                 Wait(100)
 
                 if AdminAllowed then
@@ -644,7 +644,7 @@ function OpenAdvancedActions(Player)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "ban" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Ban')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Ban')
                 Wait(100)
 
                 if AdminAllowed then
@@ -675,7 +675,7 @@ function OpenAdvancedActions(Player)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "unban" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Unban')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Unban')
                 Wait(100)
 
                 if AdminAllowed then
@@ -690,7 +690,7 @@ function OpenAdvancedActions(Player)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "whitelist" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Whitelist')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Whitelist')
                 Wait(100)
 
                 if AdminAllowed then
@@ -707,7 +707,7 @@ function OpenAdvancedActions(Player)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "unwhitelist" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Unwhitelist')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Unwhitelist')
                 Wait(100)
 
                 if AdminAllowed then
@@ -725,7 +725,7 @@ function OpenAdvancedActions(Player)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "setgroup" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Setgroup')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Setgroup')
                 Wait(100)
 
                 if AdminAllowed then
@@ -750,7 +750,7 @@ function OpenAdvancedActions(Player)
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "setjob" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Setjob')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Setjob')
                 Wait(100)
 
                 if AdminAllowed then
@@ -821,7 +821,7 @@ function Actions()
             end
 
             if data.current.value == "delhorse" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.DeleteHorse')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.DeleteHorse')
                 Wait(100)
 
                 if AdminAllowed then
@@ -830,7 +830,7 @@ function Actions()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "delwagon" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.DeleteWagon')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.DeleteWagon')
                 Wait(100)
 
                 if AdminAllowed then
@@ -839,7 +839,7 @@ function Actions()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "delwagonradius" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.DeleteWagonsRadius')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.DeleteWagonsRadius')
                 Wait(100)
 
                 if AdminAllowed then
@@ -858,7 +858,7 @@ function Actions()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "getcoords" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.GetCoords')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.GetCoords')
                 Wait(100)
 
                 if AdminAllowed then
@@ -867,7 +867,7 @@ function Actions()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "announce" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Announce')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Announce')
                 Wait(100)
 
                 if AdminAllowed then

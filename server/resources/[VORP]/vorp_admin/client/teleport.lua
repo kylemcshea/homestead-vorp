@@ -29,7 +29,7 @@ function Teleport()
                 _G[data.trigger]()
             end
             if data.current.value == "tpm" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.WayPoint")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.WayPoint")
                 Wait(100)
                 if AdminAllowed then
                     TriggerEvent('vorp:teleportWayPoint')
@@ -40,7 +40,7 @@ function Teleport()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == 'autotpm' then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.AutoTpm")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.AutoTpm")
                 Wait(100)
                 if AdminAllowed then
                     if autotpm == false then
@@ -58,7 +58,7 @@ function Teleport()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "tptocoords" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.TpCoords")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.TpCoords")
                 Wait(100)
                 if AdminAllowed then
                     local myInput = {
@@ -102,7 +102,7 @@ function Teleport()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "tptoplayer" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.TpPlayer")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.TpPlayer")
                 Wait(100)
                 if AdminAllowed then
                     TriggerEvent("vorpinputs:getInput", _U("confirm"), _U("insertid"), function(result)
@@ -125,7 +125,7 @@ function Teleport()
                     TriggerServerEvent("vorp_admin:sendAdminBack")
                 end
             elseif data.current.value == "bringplayer" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.BringPlayer")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.BringPlayer")
                 Wait(100)
                 if AdminAllowed then
                     TriggerEvent("vorpinputs:getInput", _U("confirm"), _U("insertid"), function(result)

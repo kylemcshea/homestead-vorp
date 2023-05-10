@@ -80,7 +80,7 @@ function OpenMenu()
             end
 
             if data.current.value == "administration" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Admin')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Admin')
                 Wait(100)
                 if AdminAllowed then
                     Admin()
@@ -88,7 +88,7 @@ function OpenMenu()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "boost" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Boosters')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Boosters')
                 Wait(100)
                 if AdminAllowed then
                     Boost()
@@ -96,7 +96,7 @@ function OpenMenu()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "database" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Database')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Database')
                 Wait(100)
                 if AdminAllowed then
                     DataBase()
@@ -104,7 +104,7 @@ function OpenMenu()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "teleport" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Teleports')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Teleports')
                 Wait(100)
                 if AdminAllowed then
                     Teleport()
@@ -112,7 +112,7 @@ function OpenMenu()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "devtools" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", 'vorp.staff.Devtools')
+                TriggerServerEvent("vorp_admin:openStaffMenu", 'vorp.staff.Devtools')
                 Wait(100)
                 if AdminAllowed then
                     OpenDevTools()

@@ -136,7 +136,7 @@ function Boost()
                 _G[data.trigger]()
             end
             if data.current.value == "god" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.Godmode")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.Godmode")
                 Wait(100)
                 if AdminAllowed then
                     GODmode()
@@ -144,7 +144,7 @@ function Boost()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "invisibility" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.Invisibility")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.Invisibility")
                 Wait(100)
                 if AdminAllowed then
                     if invis == false then --if invis is false then
@@ -158,7 +158,7 @@ function Boost()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "goldcores" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.Golden")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.Golden")
                 Wait(100)
                 if AdminAllowed then
                     GoldenCores()
@@ -167,7 +167,7 @@ function Boost()
                 end
             elseif data.current.value == "noclip" then
                 local player = PlayerPedId()
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.Noclip")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.Noclip")
                 Wait(100)
                 if AdminAllowed then
                     if not NoClipActive then
@@ -188,7 +188,7 @@ function Boost()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "infiniteammo" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.InfiniteAmmo")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.InfiniteAmmo")
                 Wait(100)
                 if AdminAllowed then
                     InfiAmmo()
@@ -196,7 +196,7 @@ function Boost()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "selfrevive" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.SelfRevive")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.SelfRevive")
                 Wait(100)
                 if AdminAllowed then
                     TriggerEvent('vorp:resurrectPlayer')
@@ -210,7 +210,7 @@ function Boost()
                     TriggerEvent("vorp:TipRight", _U("noperms"), 4000)
                 end
             elseif data.current.value == "selfheal" then
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.SelfHeal")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.SelfHeal")
                 Wait(100)
                 if AdminAllowed then
                     if Config.BoosterLogs.SelfHeal then
@@ -225,7 +225,7 @@ function Boost()
                 end
             elseif data.current.value == "spawnhorse" then
                 local player = PlayerPedId()
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.SpawHorse")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.SpawHorse")
                 Wait(100)
                 if AdminAllowed then
                     local myInput = {
@@ -268,7 +268,7 @@ function Boost()
                 end
             elseif data.current.value == "spawnwagon" then
                 local player = PlayerPedId()
-                TriggerServerEvent("vorp_admin:opneStaffMenu", "vorp.staff.SpawnWagon")
+                TriggerServerEvent("vorp_admin:openStaffMenu", "vorp.staff.SpawnWagon")
                 Wait(100)
                 if AdminAllowed then
                     local myInput = {
