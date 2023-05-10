@@ -152,7 +152,7 @@ function GivePlayers(PlayerData)
                             inputHeader = "GIVE ITEM", -- header
                             type = "text", -- inputype text, number,date.etc if number comment out the pattern
                             pattern = "[A-Za-z0-9_ ]{3,60}", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
-                            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
+                            title = "DONT USE - and . or , commas", -- if input doesnt match show this message
                             style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
                         }
                     }
@@ -193,7 +193,7 @@ function GivePlayers(PlayerData)
                             inputHeader = "GIVE WEAPON", -- header
                             type = "text", -- inputype text, number,date.etc if number comment out the pattern
                             pattern = "[A-Za-z_ ]{5,60}", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
-                            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
+                            title = "DONT USE - and . or , commas", -- if input doesnt match show this message
                             style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
                         }
                     }
@@ -231,7 +231,7 @@ function GivePlayers(PlayerData)
                             inputHeader = "GIVE MONEY", -- header
                             type = "text", -- inputype text, number,date.etc if number comment out the pattern
                             pattern = "[0-9 ]{1,20}", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
-                            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
+                            title = "DONT USE - and . or , commas", -- if input doesnt match show this message
                             style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
                         }
                     }
@@ -275,7 +275,7 @@ function GivePlayers(PlayerData)
                             inputHeader = "GIVE GOLD", -- header
                             type = "text", -- inputype text, number,date.etc if number comment out the pattern
                             pattern = "[0-9 ]{1,20}", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
-                            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
+                            title = "DONT USE - and . or , commas", -- if input doesnt match show this message
                             style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
                         }
                     }
@@ -319,7 +319,7 @@ function GivePlayers(PlayerData)
                             inputHeader = "GIVE HORSE", -- header
                             type = "text", -- inputype text, number,date.etc if number comment out the pattern
                             pattern = "[A-Za-z0-9_ ]{9,30}", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
-                            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
+                            title = "DONT USE - and . or , commas", -- if input doesnt match show this message
                             style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
                         }
                     }
@@ -361,7 +361,7 @@ function GivePlayers(PlayerData)
                             inputHeader = "GIVE WAGON", -- header
                             type = "text", -- inputype text, number,date.etc if number comment out the pattern
                             pattern = "[A-Za-z0-9_ ]{9,30}", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
-                            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
+                            title = "DONT USE - and . or , commas", -- if input doesnt match show this message
                             style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
                         }
                     }
@@ -489,7 +489,7 @@ function RemovePlayers(PlayerData)
                             inputHeader = "ARE YOU SURE?", -- header
                             type = "text", -- inputype text, number,date.etc if number comment out the pattern
                             pattern = "[A-Za-z]+", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
-                            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
+                            title = "DONT USE - and . or , commas", -- if input doesnt match show this message
                             style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
                         }
                     }
@@ -530,7 +530,7 @@ function RemovePlayers(PlayerData)
                             inputHeader = "ARE YOU SURE?", -- header
                             type = "text", -- inputype text, number,date.etc if number comment out the pattern
                             pattern = "[A-Za-z]+", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
-                            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
+                            title = "DONT USE - and . or , commas", -- if input doesnt match show this message
                             style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
                         }
                     }
@@ -597,43 +597,4 @@ function OpenInvnetory(inventorydata)
             menu.close()
         end)
 
-end
-
----@param targetData: { targetID: string, moneyType: 'money' | 'gold' }
----@return void
-function giveCurrencyToPlayer(targetData)
-    local targetID = targetData.targetID
-    local myInput = {
-        type = "enableinput", -- dont touch
-        inputType = "input",
-        button = _U("confirm"), -- button name
-        placeholder = "CURRENCY QUANTITY", --placeholdername
-        style = "block", --- dont touch
-        attributes = {
-            inputHeader = "CURRENCY AMOUNT", -- header
-            type = "number", -- inputype text, number,date.etc if number comment out the pattern
-            pattern = "[0-9]{1,20}", -- regular expression validated for only numbers "[0-9]", for letters only [A-Za-z]+   with charecter limit  [A-Za-z]{5,20}     with chareceter limit and numbers [A-Za-z0-9]{5,}
-            title = "DONT USE - and . or , comas", -- if input doesnt match show this message
-            style = "border-radius: 10px; background-color: ; border:none;", -- style  the inptup
-        }
-    }
-
-    TriggerEvent("vorpinputs:advancedInput", json.encode(myInput), function(response)
-        local result = tostring(response)
-
-        if (not result or result == "") then
-            return TriggerEvent("vorp:TipRight", _U("empty"), 4000)
-        end
-
-        local moneyType, Quantity =  targetData.moneyType == 'money' and 0 or 1, result
-
-        TriggerServerEvent("vorp_admin:givePlayer", targetID, 'moneygold', moneyType, Quantity)
-        if Config.DatabaseLogs.Givecurrency then
-            TriggerServerEvent("vorp_admin:logs", Config.DatabaseLogs.Givecurrency,
-                _U("titledatabase")
-                , _U("usedgivecurrency") ..
-                "\nPlayer: " .. PlayerData.PlayerName .. "\ntype: " .. moneyType ..
-                "\nQTY: " .. Quantity)
-        end
-    end)
 end
