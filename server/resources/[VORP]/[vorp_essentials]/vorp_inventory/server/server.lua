@@ -55,6 +55,8 @@ AddEventHandler("vorpinventory:itemlog", function(_source, targetHandle, itemNam
     local name2 = GetPlayerName(targetHandle)
     local description = name .. Config.Language.gave .. amount .. " " .. itemName .. Config.Language.to .. name2
     --  Discord(Config.Language.gaveitem, _source, description)
+    local splunk = {Name = Name, name = name, name2 = name2, item = itemName, description = description}
+    exports.webhook:send_to_splunk(splunk, "itemlog")
     Core.AddWebhook(_source, Config.webhook, description, color, Name, logo, footerlogo, avatar)
 end)
 
