@@ -1,4 +1,3 @@
-
 local VorpCore = {}
 
 TriggerEvent("getCore", function(core)
@@ -6,14 +5,14 @@ TriggerEvent("getCore", function(core)
 end)
 
 function send_to_splunk(data, source_type)
-    local endpointUrl = "YOUR SPLUNK LINK HERE"
-    local authToken = "YOUR SPLUNK TOKEN HERE"
+    local endpointUrl = GetConvar('webhook:splunkLink', '')
+    local authToken = GetConvar('webhook:splunkToken', '')
     local index = "main"
     local sourcetype = source_type
     local headers = {
         ["Authorization"] = "Splunk " .. authToken,
         ["Content-Type"] = "application/json",
-    
+
       }
       local body = json.encode({
         index = index,
@@ -34,14 +33,10 @@ function send_to_discord(data, channel)
   local discord = ""
   if channel == "mailbox Broadcast"   then
       --enter discord link next line for that channel
-      discord = "YOUR-FIRST-DISCORD-WEBHOOK-HERE" 
+      discord = GetConvar('webhook:discordBroadcast', '')
   elseif channel == "chat" then
       --enter discord link next line for that channel
-      discord = "YOUR-SECOND-DISCORD-WEBHOOK-HERE" 
-  elseif channel == "bank" then
-      --enter discord link next line for that channel
- elseif channel == "inventory" then
-      --enter discord link next line for that channel
+      discord = GetConvar('webhook:discordChat', '')
   end
   local headers = {
     ["Content-Type"] = "application/json"
@@ -50,14 +45,16 @@ function send_to_discord(data, channel)
   local message = decoded_data.message
   local discord_body = json.encode({
     username = data.char,
-    content = message,        
+    content = message,
   })
-
-  PerformHttpRequest(discord, function(statusCode, responseText, headers)
-    if statusCode ~= 204 then
-      print("Failed to send message to Discord webhook:", responseText)
-    end
-  end, "POST", discord_body, headers)
+  if channel == "chat" or channel == "mailbox Broadcast"
+  then
+    PerformHttpRequest(discord, function(statusCode, responseText, headers)
+      if statusCode ~= 204 then
+        print("Failed to send message to Discord webhook:", responseText)
+      end
+    end, "POST", discord_body, headers)
+  end
 end -- end of send to discord
 
 
@@ -65,31 +62,19 @@ end -- end of send to discord
 exports('send_to_splunk', send_to_splunk)
 exports('send_to_discord', send_to_discord)
 
--- RegisterCommand("testing_splunk", function(src, args)
---   local message = args[1]
---    print(src .. " " .. json.encode(args))
---   local data = {message = message}
---   TriggerEvent("mailbox:broadcastMessage", src, "message")
--- end)
-
-
 RegisterServerEvent("mailbox:broadcastMessage")
 AddEventHandler('mailbox:broadcastMessage', function(data)
-   data = json.encode(data)
-   --print(data)
-   local sourceCharacter = VorpCore.getUser(source).getUsedCharacter
-   local steamIdentifier =  VorpCore.getUser(source).getIdentifier()
-   local what_were_sending = {data = data,
-  char = sourceCharacter.firstname .. " " .. sourceCharacter.lastname,
-  steamId = steamIdentifier}
-   send_to_splunk(what_were_sending, "mailbox Broadcast")
-   send_to_discord(what_were_sending, "mailbox Broadcast")
-end
-)
+  data = json.encode(data)
+  local sourceCharacter = VorpCore.getUser(source).getUsedCharacter
+  local steamIdentifier =  VorpCore.getUser(source).getIdentifier()
+  local what_were_sending = { data = data, char = sourceCharacter.firstname .. " " .. sourceCharacter.lastname, steamId = steamIdentifier }
+  send_to_splunk(what_were_sending, "mailbox Broadcast")
+  send_to_discord(what_were_sending, "mailbox Broadcast")
+end)
 
 RegisterServerEvent("vorpCoreClient:addItem")
 AddEventHandler("vorpCoreClient:addItem", function(_source, item)
-  local what_were_sending = {source = _source, item=item}
+  local what_were_sending = { source = _source, item = item }
   send_to_splunk(what_were_sending,"inventory")
 end)
 
@@ -99,9 +84,31 @@ AddEventHandler("chatMessage", function(source, author, text)
   local steamIdentifier =  VorpCore.getUser(source).getIdentifier()
   local what_were_sending = { 
     data = data,
-    char = sourceCharacter.firstname .. " " .. sourceCharacter.lastname .. "("..author..")",    
+    char = sourceCharacter.firstname .. " " .. sourceCharacter.lastname .. "("..author..")",
   }
   send_to_discord(what_were_sending, "chat")
   local for_splunk ={author = author, char =sourceCharacter.firstname .. " " .. sourceCharacter.lastname, message = text, }
   send_to_splunk(for_splunk, "chat")
+end)
+
+RegisterServerEvent("vorp:ImDead")
+AddEventHandler("vorp:ImDead", function(isDead)
+  local isDead = isDead 
+  local source = source
+ 
+  if isDead then
+    
+    local sourceCharacter = VorpCore.getUser(source).getUsedCharacter
+    local steamIdentifier =  VorpCore.getUser(source).getIdentifier()
+    local data = json.encode({message = sourceCharacter.firstname .. " " .. sourceCharacter.lastname .. " died",})
+    local what_were_sending = { 
+      --char = sourceCharacter.firstname .. " " .. sourceCharacter.lastname,
+      data = data,
+      char = "VORP"
+    }
+    send_to_discord(what_were_sending, "deathlog")
+    local for_splunk ={char =sourceCharacter.firstname .. " " .. sourceCharacter.lastname, action="died", pretty =sourceCharacter.firstname .. " " .. sourceCharacter.lastname .. " died."  }
+    --local for_splunk ={char = source, action="died", pretty = source .. " died."  }
+    send_to_splunk(for_splunk, "deathlog")
+  end
 end)

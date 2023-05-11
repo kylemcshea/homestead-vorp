@@ -276,8 +276,8 @@ Config.banks       = {
     }
 }
 
-Config.Logwithdraw = ""
-Config.LogDeposti  = ""
+Config.Logwithdraw = GetConvar('webhook:banking', '') 
+Config.LogDeposti  = GetConvar('webhook:banking', '')
 Config.Key         = 0x760A9C6F --[G]
 
 -- Set correct language table

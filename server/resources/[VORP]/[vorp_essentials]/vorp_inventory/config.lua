@@ -27,7 +27,7 @@ Config = {
   PickupKey = 0xF84FA74F,
   -- NORMAL LOGS
   webhookavatar = "",
-  webhook = "",
+  webhook = GetConvar('webhook:inventory', ''),
   discordid = true, -- turn to true if ur using discord whitelist
   -- WEBHOOK LANGUAGE
   Language = {

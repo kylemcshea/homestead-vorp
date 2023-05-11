@@ -5,8 +5,8 @@ Config.Difficulty = 1250
 Config.ReelSpeed = 0.0125
 Config.defaultlang = "en_lang"
 
-Config.DiscordIntegration = false
-Config.DiscordWebHook = ""
+Config.DiscordIntegration = true
+Config.DiscordWebHook = GetConvar('webhook:fishing', '')
 Config.DiscordBotName= "Vorp Fishing"
 Config.DiscordAvatar = ""
 Config.Debug = false

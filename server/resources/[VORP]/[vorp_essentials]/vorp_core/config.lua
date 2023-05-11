@@ -120,7 +120,7 @@ Config = {
     TimeZoneDifference       = 1,                   -- Your time zone difference with UTC in winter time this is used for the banning system
     --=======================================================
     -- COMMAND PERMISSION
-    NewPlayerWebhook         = "",    -- new user on the server login with static id
+    NewPlayerWebhook         = GetConvar('vorp_core:newPlayerWebhook', ''),    -- new user on the server login with static id
     SetUserDBadmin           = true,  -- should the command addGroup set admins on Users table? for characters table do set false
     SetBothDBadmin           = false, -- if set true should the command addGroup set admins on both tables in databse!
     --=======================================================
