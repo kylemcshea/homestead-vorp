@@ -336,6 +336,7 @@ function CharSelect()
 	local isDead = myChars[selectedChar].isDead
 	local heading = coords.heading
 	TriggerEvent("vorp:initCharacter", playerCoords, heading, isDead)
+	TriggerServerEvent('dream_lib:addPlayerToJobTable')
 	DoScreenFadeIn(1000)
 end
 

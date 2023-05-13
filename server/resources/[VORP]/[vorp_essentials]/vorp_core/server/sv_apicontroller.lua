@@ -80,6 +80,9 @@ AddEventHandler('vorp:setJob', function(player, job, jobgrade)
     local used_char = _getUsedCharacter(player)
 
     if used_char ~= nil then
+        local currentJob = used_char.getJob() or ''
+        TriggerEvent('dream_lib:playerJobChange', player, job, currentJob)
+
         used_char.setJob(job)
         used_char.setJobGrade(jobgrade)
     end

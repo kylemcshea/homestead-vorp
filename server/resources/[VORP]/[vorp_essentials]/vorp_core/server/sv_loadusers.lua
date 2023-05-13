@@ -56,6 +56,9 @@ AddEventHandler('playerDropped', function()
         pHeading = GetEntityHeading(ped)
     end
 
+    local xJob = VorpCore.getUser(_source).getJob()
+    TriggerServerEvent('dream_lib:removePlayerFromJobTable', xJob, _source)
+
     if _users[identifier] and _users[identifier].GetUsedCharacter() then
         if Config.SavePlayersStatus then
             _users[identifier].GetUsedCharacter().HealthOuter(_healthData[identifier].hOuter)

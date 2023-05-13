@@ -258,6 +258,11 @@ end)
 --=========================== DEATH HANDLER =================================--
 
 
+local MEDIC_JOBS = { 
+    'doctor', 
+    'shaman',
+}
+
 --DEATH HANDLER
 CreateThread(function()
     while Config.UseDeathHandler do
@@ -272,14 +277,23 @@ CreateThread(function()
                 exports.spawnmanager.setAutoSpawn(false)
                 TriggerServerEvent("vorp:ImDead", true)
                 DisplayRadar(false)
-                TimeToRespawn = Config.RespawnTime
-                CreateThread(function() -- asyncronous timer
-                    RespawnTimer()
-                    StartDeathCam()
-                end)
-                PressKey = false
-                setDead = true
-                PromptSetEnabled(prompt, 1)
+
+                VORP.RpcCall("dream_lib:Callback:getOnDutyCount", function(doctorCount)
+                    if doctorCount < 1 then
+                        TimeToRespawn = Config.RespawnTime / 2
+                    else
+                        TimeToRespawn = Config.RespawnTime
+                    end
+
+                    CreateThread(function() -- asyncronous timer
+                        RespawnTimer()
+                        StartDeathCam()
+                    end)
+                    PressKey = false
+                    setDead = true
+                    PromptSetEnabled(prompt, 1)
+
+                end, MEDIC_JOBS)
             end
 
             if not PressKey and setDead then
