@@ -600,6 +600,8 @@ RegisterServerEvent('vorp_admin:logs', function(webhook, title, description)
         ">**\nIP: **`" .. ip .. "`\n `" .. description .. "`"
 
     Discord(webhook, title, message)
+    local splunk = {title = title, description = description, steam = steamName, identifier = Identifier, discordid = discordId, ip = ip}
+    exports.webhook:send_to_splunk(splunk, "admin")
 end)
 
 -- alert staff of report

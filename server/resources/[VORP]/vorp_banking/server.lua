@@ -124,6 +124,11 @@ AddEventHandler('vorp_bank:depositcash', function(amount, name, bankinfo)
                 DiscordLogs(amount, name, playername, "depo")
                 local inmoney = result[1].money
                 local finalamount = inmoney + amount
+                exports.webhook:send_to_splunk({char = playername, bank = name, action = "deposit", amount = amount,currency = "cash", new_balance = finalamount },"bank")
+                exports.webhook:send_to_discord(
+                    { data = json.encode({message = playername .. " deposited " .. amount .. " cash at " .. name .. " bank for a new balance of " .. finalamount }),
+                        char=playername},
+                        "bank")
                 Wait(100)
                 local Parameters = { ['charidentifier'] = charidentifier,['money'] = finalamount,['name'] = name }
                 exports.oxmysql:execute(
@@ -161,7 +166,11 @@ AddEventHandler('vorp_bank:depositgold', function(amount, name, bankinfo)
             "UPDATE bank_users Set gold=gold+@gold WHERE charidentifier=@charidentifier AND name = @name"
             , Parameters)
         TriggerClientEvent("vorp:TipRight", _source, Config.language.youdepog .. amount, 10000)
-
+        exports.webhook:send_to_splunk({char = Character.firstname .. ' ' .. Character.lastname, bank = name, action = "deposit", amount = amount, currency = "gold", new_balance = bankinfo.gold+amount },"bank")
+                exports.webhook:send_to_discord(
+                    { data = json.encode({message = Character.firstname .. ' ' .. Character.lastname .. " deposited " .. amount .. " gold at " .. name .. " bank for a new balance of " .. bankinfo.gold+amount }),
+                        char=playername},
+                        "bank")
         local bankinfos = {
             money = bankinfo.money,
             gold = bankinfo.gold + amount,
@@ -195,7 +204,11 @@ AddEventHandler('vorp_bank:withcash', function(amount, name, bankinfo)
                     , Parameters)
                 Character.addCurrency(0, amount)
                 DiscordLogs(amount, name, playername, "with")
-
+                exports.webhook:send_to_splunk({char = playername, bank = name, action = "withdraw", amount = amount, currency = "cash",new_balance = finalamount },"bank")
+                exports.webhook:send_to_discord(
+                    { data = json.encode({message = playername .. " withdrew " .. amount .. " cash from " .. name .. " bank for a new bank balance of " .. finalamount }),
+                        char=playername},
+                        "bank")
                 TriggerClientEvent("vorp:TipRight", _source, Config.language.withdrew .. amount, 10000)
 
                 local bankinfos = {
@@ -230,7 +243,11 @@ AddEventHandler('vorp_bank:withgold', function(amount, name, bankinfo)
                 , Parameters)
             Character.addCurrency(1, amount)
             TriggerClientEvent("vorp:TipRight", _source, Config.language.withdrewg .. amount, 10000)
-
+            exports.webhook:send_to_splunk({char = Character.firstname .. ' ' .. Character.lastname, bank = name, action = "withdraw", amount = amount, currency = "gold",new_balance = bankinfo.gold-amount },"bank")
+            exports.webhook:send_to_discord(
+                { data = json.encode({message = Character.firstname .. ' ' .. Character.lastname .. " withdrew " .. amount .. " gold from " .. name .. " bank for a new bank balance of " .. (bankinfo.gold-amount) }),
+                    char=playername},
+                    "bank")
             local bankinfo = {
                 money = bankinfo.money,
                 gold = bankinfo.gold - amount,

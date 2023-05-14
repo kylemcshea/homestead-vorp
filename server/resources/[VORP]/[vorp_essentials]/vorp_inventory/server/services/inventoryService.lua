@@ -97,6 +97,8 @@ InventoryService.DropMoney = function(amount)
 			TriggerClientEvent("vorpInventory:createMoneyPickup", _source, amount)
 			local title = _U('drop')
 			local description = "**Money** `" .. amount .. "`" .. "\n **Playername** `" .. charname .. "`\n"
+			local splunk = {description = charname .. " dropped " .. amount .. " " .. "cash", char = charname, amount = amount, currency = "cash"}
+			exports.webhook:send_to_splunk(splunk, "moneylog")
 			Core.AddWebhook(title, Config.webhook, description, color, "ID:" .. _source, logo, footerlogo, avatar)
 		end
 		SvUtils.Trem(_source)
@@ -457,7 +459,9 @@ InventoryService.onPickup = function(obj)
 									"`\n **Item** `" .. name .. "`" .. "\n **Playername** `" .. charname .. "`\n"
 								Core.AddWebhook(title, Config.webhook, description, color, _source, logo, footerlogo,
 									avatar)
-
+								local splunk = {description = charname .. " picked up " .. amount .. " " .. name, char = charname, amount = amount, item = name}
+								exports.webhook:send_to_splunk(splunk, "itemlog")
+									
 								TriggerClientEvent("vorpInventory:sharePickupClient", -1, name, ItemPickUps[obj].obj,
 									amount, metadata,
 									ItemPickUps[obj].coords, 2)
@@ -493,6 +497,9 @@ InventoryService.onPickup = function(obj)
 					local description = "**Weapon** `" ..
 						userWeapons[weaponId]:getName() .. "`" .. "\n **Playername** `" .. charname .. "`\n"
 					Core.AddWebhook(title, Config.webhook, description, color, _source, logo, footerlogo, avatar)
+					local splunk = {description = charname .. " picked up " .. 1 .. " " .. userWeapons[weaponId]:getName(), char = charname, amount = 1, item = userWeapons[weaponId]:getName()}
+					exports.webhook:send_to_splunk(splunk, "itemlog")
+		
 					TriggerClientEvent("vorpInventory:sharePickupClient", -1, name, weaponObj, 1, metadata,
 						ItemPickUps[obj].coords, 2,
 						weaponId)
@@ -523,6 +530,8 @@ InventoryService.onPickupMoney = function(obj)
 			local title = _U('itempickup')
 			local description = "**Money** `" .. moneyAmount .. " $`" .. "\n **Playername** `" .. charname .. "`\n"
 			Core.AddWebhook(title, Config.webhook, description, color, _source, logo, footerlogo, avatar)
+			local splunk = {description = charname .. " picked up " .. moneyAmount .. " cash", char = charname, amount = moneyAmount, currency = "cash"}
+			exports.webhook:send_to_splunk(splunk, "moneylog")			
 			TriggerClientEvent("vorpInventory:shareMoneyPickupClient", -1, moneyObj, moneyAmount, moneyCoords, 2)
 			TriggerClientEvent("vorpInventory:removePickupClient", -1, moneyObj)
 			TriggerClientEvent("vorpInventory:playerAnim", _source, moneyObj)
@@ -538,10 +547,14 @@ InventoryService.onPickupGold = function(obj)
 	if not SvUtils.InProcessing(_source) then
 		if GoldPickUps[obj] ~= nil then
 			SvUtils.ProcessUser(_source)
+			local _source = source
+			local sourceCharacter = Core.getUser(_source).getUsedCharacter
+			local charname = sourceCharacter.firstname .. ' ' .. sourceCharacter.lastname
 			local goldObj = GoldPickUps[obj].obj
 			local goldAmount = GoldPickUps[obj].amount
 			local goldCoords = GoldPickUps[obj].coords
-
+			local splunk = {description = charname .. " picked up " .. goldAmount .. " gold", char = charname, amount = goldAmount, currency = "gold"}
+			exports.webhook:send_to_splunk(splunk, "moneylog")
 			TriggerClientEvent("vorpInventory:shareGoldPickupClient", -1, goldObj, goldAmount, goldCoords, 2)
 			TriggerClientEvent("vorpInventory:removePickupClient", -1, goldObj)
 			TriggerClientEvent("vorpInventory:playerAnim", _source, goldObj)
@@ -603,6 +616,8 @@ InventoryService.DropWeapon = function(weaponId)
 		local description = "**Weapon** `" ..
 			UsersWeapons["default"][weaponId]:getName() .. "`" .. "\n **Playername** `" .. charname .. "`\n"
 		Core.AddWebhook(title, Config.webhook, description, color, _source, logo, footerlogo, avatar)
+		local splunk = {description = charname .. " dropped " .. 1 .. " " .. UsersWeapons["default"][weaponId]:getName(), char = charname, amount = 1, item = UsersWeapons["default"][weaponId]:getName()}
+		exports.webhook:send_to_splunk(splunk, "itemlog")
 		TriggerClientEvent("vorpInventory:createPickup", _source, UsersWeapons["default"][weaponId]:getName(), 1, {},
 			weaponId)
 		SvUtils.Trem(_source)
@@ -619,8 +634,9 @@ InventoryService.DropItem = function(itemName, itemId, amount, metadata)
 		local title = _U('drop')
 		local description = "**Amount** `" ..
 			amount .. "`\n **Item** `" .. itemName .. "`" .. "\n **Playername** `" .. charname .. "`\n"
-
 		Core.AddWebhook(title, Config.webhook, description, color, _source, logo, footerlogo, avatar)
+		local splunk = {description = charname .. " dropped " .. amount .. " " .. itemName, char = charname, amount = amount, item = itemName}
+		exports.webhook:send_to_splunk(splunk, "itemlog")
 		TriggerClientEvent("vorpInventory:createPickup", _source, itemName, amount, metadata, 1)
 		SvUtils.Trem(_source)
 	end
@@ -643,6 +659,8 @@ InventoryService.GiveWeapon = function(weaponId, target)
 			1 .. "`\n **Weapon id** `" .. weaponId .. "`" .. "\n **Playername** `" .. charname .. "`\n"
 
 		Core.AddWebhook(title, Config.webhook, description, color, _source, logo, footerlogo, avatar)
+		local splunk = {description = charname .. " gave " .. 1 .. " " .. weaponId, char = charname, amount = 1, item = weaponId}
+		exports.webhook:send_to_splunk(splunk, "itemlog")
 		TriggerClientEvent("vorp_inventory:transactionCompleted", _source)
 		SvUtils.Trem(_source)
 	end
@@ -735,7 +753,7 @@ InventoryService.GiveItem = function(itemId, amount, target)
 
 		TriggerClientEvent("vorp:TipRight", _source, _U("yougive") .. amount .. _U("of") .. ItemsLabel .. "", 2000)
 		TriggerClientEvent("vorp:TipRight", _target, _U("youreceive") .. amount .. _U("of") .. ItemsLabel .. "", 2000)
-		--TriggerEvent("vorpinventory:itemlog", _source, _target, itemName, amount)
+		TriggerEvent("vorpinventory:itemlog", _source, _target, itemName, amount)
 		local title = _U('gave')
 		local description = "**Amount** `" ..
 			amount .. "`\n **Item** `" .. itemName .. "`" .. "\n **Playername** `" .. charname .. "`\n **to** `" ..

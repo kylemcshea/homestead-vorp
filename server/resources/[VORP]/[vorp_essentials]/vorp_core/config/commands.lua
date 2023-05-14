@@ -37,7 +37,7 @@ local T = Translation[Lang].Commands
 --==============================
 Commands = {
     addgroup = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:addgroup', ''),
         custom = T.addGroup.custom,
         title = T.addGroup.tittle,
         ---#end webhook
@@ -55,7 +55,7 @@ Commands = {
         end
     },
     addJob = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:addJob', ''),
         custom = T.addJob.custom,
         title = T.addJob.title,
         ---#end webhook
@@ -74,7 +74,7 @@ Commands = {
         end
     },
     addItem = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:addItem', ''),
         custom = T.addItem.custom,
         title = T.addItem.title,
         ---#end webhook
@@ -93,7 +93,7 @@ Commands = {
         end
     },
     addWeapon = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:addWeapon', ''),
         custom = T.addWeapon.custom,
         title = T.addWeapon.title,
         ---#end webhook
@@ -111,7 +111,7 @@ Commands = {
         end
     },
     delMoney = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:delMoney', ''),
         custom = T.delMoney.custom,
         title = T.delMoney.title,
         ---#end webhook
@@ -130,7 +130,7 @@ Commands = {
         end
     },
     addMoney = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:addMoney', ''),
         custom = T.addMoney.custom,
         title = T.addMoney.title,
         ---#end webhook
@@ -150,7 +150,7 @@ Commands = {
         end
     },
     delWagons = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:delWagons', ''),
         custom = T.delWagons.custom,
         title = T.delWagons.title,
         ---#end webhook
@@ -167,7 +167,7 @@ Commands = {
         end
     },
     revive = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:revive', ''),
         custom = T.revive.custom,
         title = T.revive.title,
         commandName = "revive",
@@ -183,7 +183,7 @@ Commands = {
         end
     },
     teleport = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:teleport', ''),
         custom = T.teleport.custom,
         title = T.teleport.title,
         commandName = "tpm",
@@ -197,7 +197,7 @@ Commands = {
         end
     },
     delHorse = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:delHorse', ''),
         custom = T.delHorse.custom,
         title = T.delHorse.title,
         commandName = "delHorse",
@@ -211,7 +211,7 @@ Commands = {
         end
     },
     heal = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:heal', ''),
         custom = T.heal.custom,
         title = T.heal.title,
         commandName = "heal",
@@ -231,7 +231,7 @@ Commands = {
         end
     },
     addWhitelist = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:addWhitelist', ''),
         custom = T.addWhitelist.custom,
         title = T.addWhitelist.title,
         commandName = "addWhtelist",
@@ -248,7 +248,7 @@ Commands = {
         end
     },
     unWhitelist = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:unWhitelist', ''),
         custom = T.unWhitelist.custom,
         title = T.unWhitelist.title,
         commandName = "unWhitelist",
@@ -264,7 +264,7 @@ Commands = {
         end
     },
     ban = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:ban', ''),
         custom = T.ban.custom,
         title = T.ban.title,
         commandName = "ban",
@@ -281,7 +281,7 @@ Commands = {
         end
     },
     unBan = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:unBan', ''),
         custom = T.unBan.custom,
         title = T.unBan.title,
         commandName = "unBan",
@@ -297,7 +297,7 @@ Commands = {
         end
     },
     warn = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:warn', ''),
         custom = T.warn.custom,
         title = T.warn.title,
         commandName = "warn",
@@ -313,7 +313,7 @@ Commands = {
         end
     },
     unWarn = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:unWarn', ''),
         custom = T.unWarn.custom,
         title = T.unWarn.title,
         commandName = "unWarn",
@@ -329,7 +329,7 @@ Commands = {
         end
     },
     charName = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:charName', ''),
         custom = T.charName.custom,
         title = T.charName.title,
         commandName = "modifyCharName",
@@ -348,7 +348,7 @@ Commands = {
         end
     },
     charCreateAdd = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:charCreateAdd', ''),
         custom =T.charCreateAdd.custom,
         title = T.charCreateAdd.title,
         commandName = "addChar",
@@ -364,7 +364,7 @@ Commands = {
         end
     },
     charCreateRemove = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:charCreateRemove', ''),
         custom = T.charCreateRemove.custom,
         title = T.charCreateRemove.title,
         --end webhook
@@ -381,7 +381,7 @@ Commands = {
         end
     },
     myJob = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:myJob', ''),
         commandName = "myJob",
         label = T.myJob.label,
         suggestion = {},
@@ -393,7 +393,7 @@ Commands = {
         end
     },
     myHours = {
-        webhook = "",
+        webhook = GetConvar('vorp_core:myHours', ''),
         commandName = "myHours",
         label = T.myHours.label,
         suggestion = {},

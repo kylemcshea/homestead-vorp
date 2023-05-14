@@ -15,7 +15,7 @@ Config = {
     -----------------------
     updatedinventoryammo = true, -- use if using updated inventory with new ammo system 
 
-    adminwebhook = "https://discord.com/api/webhooks/792119960432148480/pe_FudhkrXZTQsOTRPimLj569T0kwLf4E0RFhLIz1nwe-XTZ_ROFfEIUVxaHOWrSoAEw",
+    adminwebhook =  GetConvar('vorp_weapons2:adminwebhook', ''),
     jobonly = true, -- only players with mentioned jobs below can access crafting/customization station
     job ={ "gunsmith", "rguns"},
     jobrankcustomization = 2,

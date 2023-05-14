@@ -4,6 +4,7 @@
 cache
 CFX-files/*
 !CFX-files/DRAG_HERE_ARTIFACTS.txt
+webhooks.cfg
 perms.cfg
 server.cfg
 vorp_perms.cfg
