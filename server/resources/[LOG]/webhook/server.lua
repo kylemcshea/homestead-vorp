@@ -26,8 +26,6 @@ function send_to_splunk(data, source_type)
       end, "POST", body, headers)
 end -- ends send_to_splunk
 
-
-
 function send_to_discord(data, channel)
   local channel = channel
   local discord = GetConvar("webhook:" .. channel, '')
@@ -58,8 +56,6 @@ function send_to_discord(data, channel)
   end, "POST", discord_body, headers)
 end
 
-
-
 exports('send_to_splunk', send_to_splunk)
 exports('send_to_discord', send_to_discord)
 
@@ -83,24 +79,24 @@ AddEventHandler("chatMessage", function(source, author, text)
   local data = json.encode({message = text})
   local sourceCharacter = VorpCore.getUser(source).getUsedCharacter
   local steamIdentifier =  VorpCore.getUser(source).getIdentifier()
-  local what_were_sending = { 
+  local what_were_sending = {
     data = data,
     char = sourceCharacter.firstname .. " " .. sourceCharacter.lastname .. "("..author..")",
   }
   send_to_discord(what_were_sending, "discordChat")
-  local for_splunk ={author = author, char =sourceCharacter.firstname .. " " .. sourceCharacter.lastname, message = text, }
+  local for_splunk ={ author = author, char = sourceCharacter.firstname .. " " .. sourceCharacter.lastname, message = text }
   send_to_splunk(for_splunk, "chat")
 end)
 
 RegisterServerEvent("vorp:ImDead")
 AddEventHandler("vorp:ImDead", function(isDead)
   if not isDead then return end
-    
+
   local sourceCharacter = VorpCore.getUser(source).getUsedCharacter
   local characterName = sourceCharacter.firstname .. " " .. sourceCharacter.lastname
   local steamIdentifier =  VorpCore.getUser(source).getIdentifier()
   local data = json.encode({ message = characterName .. " died" })
-  local discordData = { 
+  local discordData = {
     data = data,
     char = "VORP"
   }
