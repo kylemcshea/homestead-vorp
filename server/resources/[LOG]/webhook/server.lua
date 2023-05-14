@@ -91,24 +91,24 @@ AddEventHandler("chatMessage", function(source, author, text)
   send_to_splunk(for_splunk, "chat")
 end)
 
-RegisterServerEvent("vorp:ImDead")
-AddEventHandler("vorp:ImDead", function(isDead)
-  local isDead = isDead 
-  local source = source
- 
-  if isDead then
-    
-    local sourceCharacter = VorpCore.getUser(source).getUsedCharacter
-    local steamIdentifier =  VorpCore.getUser(source).getIdentifier()
-    local data = json.encode({message = sourceCharacter.firstname .. " " .. sourceCharacter.lastname .. " died",})
-    local what_were_sending = { 
-      --char = sourceCharacter.firstname .. " " .. sourceCharacter.lastname,
-      data = data,
-      char = "VORP"
-    }
-    send_to_discord(what_were_sending, "deathlog")
-    local for_splunk ={char =sourceCharacter.firstname .. " " .. sourceCharacter.lastname, action="died", pretty =sourceCharacter.firstname .. " " .. sourceCharacter.lastname .. " died."  }
-    --local for_splunk ={char = source, action="died", pretty = source .. " died."  }
-    send_to_splunk(for_splunk, "deathlog")
-  end
+AddEventHandler("vorp:ImDead", function(source, isDead)
+  if (not isDead) then return end
+
+  local sourceCharacter = VorpCore.getUser(source).getUsedCharacter
+  local charName = sourceCharacter.firstname .. " " .. sourceCharacter.lastname
+  local steamIdentifier =  VorpCore.getUser(source).getIdentifier()
+  local data = json.encode({ message = charName .. " died" })
+
+  local discordData = {
+    data = data,
+    char = "VORP"
+  }
+  send_to_discord(discordData, "deathlog")
+
+  local splunkData = {
+    char = charName,
+    action = "died",
+    pretty = charName .. " died.",
+  }
+  send_to_splunk(splunkData, "deathlog")
 end)
