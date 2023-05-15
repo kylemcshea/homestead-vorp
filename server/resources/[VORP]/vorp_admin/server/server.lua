@@ -417,10 +417,14 @@ RegisterServerEvent("vorp_admin:setJob", function(targetID, newjob, newgrade)
     local NewPlayerJoB = newjob
     local NewPlayerGrade = newgrade
     if VorpCore.getUser(_source) then
-        TriggerEvent("vorp:setJob", _source, NewPlayerJoB, NewPlayerGrade) -- it doesnt update players need to relog
-        VorpCore.NotifyRightTip(_source, _U("jobgiven") .. NewPlayerJoB, 5000)
-        Wait(500)
-        VorpCore.NotifyRightTip(_source, _U("gradegiven") .. NewPlayerGrade, 5000)
+        if exports.homestead_jobs:validateJob(newjob, newgrade) then
+            TriggerEvent("vorp:setJob", _source, NewPlayerJoB, NewPlayerGrade) -- it doesnt update players need to relog
+            VorpCore.NotifyRightTip(_source, _U("jobgiven") .. NewPlayerJoB, 5000)
+            Wait(500)
+            VorpCore.NotifyRightTip(_source, _U("gradegiven") .. NewPlayerGrade, 5000)
+        else
+            print("DevPrint: job not found")
+        end      
     end
 end)
 

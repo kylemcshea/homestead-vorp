@@ -1,0 +1,133 @@
+{
+    "Jobs": {
+        "NativeCraftsman": {
+            "1": {
+                "title": "Apprentice",
+                "salary": 0
+            },
+            "2": {
+                "title": "Craftsman",
+                "salary": 0
+            },
+            "3": {
+                "title": "Master Craftsman",
+                "salary": 0
+            }
+        },
+        "Gunsmith": {
+            "1": {
+                "title": "Apprentice",
+                "salary": 0
+            },
+            "2": {
+                "title": "Gunsmith",
+                "salary": 0
+            },
+            "3": {
+                "title": "Master Gunsmith",
+                "salary": 0
+            }
+        },
+        "blacksmith": {
+            "1": {
+                "title": "Apprentice",
+                "salary": 0
+            },
+            "2": {
+                "title": "Gunsmith",
+                "salary": 0
+            },
+            "3": {
+                "title": "Master Gunsmith",
+                "salary": 0
+            }
+        },
+        "Doctor": {
+            "1": {
+                "title": "Student Doctor",
+                "salary": 0
+            },
+            "2": {
+                "title": "Doctor",
+                "salary": 0
+            },
+            "3":{
+                "title": "Head Doctor",
+                "salary": 0
+            },
+            "4": {
+                "title": "Medical Director",
+                "salary": 0
+            }
+        },
+        "Shaman": {
+            "1": {
+                "title": "Learning Shaman",
+                "salary": 0
+            },
+            "2": {
+                "title": "Shaman",
+                "salary": 0
+            },
+            "3":{
+                "title": "Head Shaman",
+                "salary": 0
+            },
+            "4": {
+                "title": "High Shaman",
+                "salary": 0
+            }
+        },
+        "Sheriff": {
+            "1": {
+                "title": "Deputy Sheriff",
+                "salary": 0
+            },
+            "2": {
+                "title": "Sheriff",
+                "salary": 0
+            }
+        },
+        "Marshall": {
+            "1": {
+                "title": "Deputy Marshall",
+                "salary": 0
+            },
+            "2": {
+                "title": "Marshall",
+                "salary": 0
+            }
+        },
+        "Courthouse": {
+            "1": {
+                "title": "Clerk",
+                "salary": 0
+            },
+            "2": {
+                "title": "Judge",
+                "salary": 0
+            }
+        },
+        "SupremeCourt": {
+            "1": {
+                "title": "Clerk",
+                "salary": 0
+            },
+            "2": {
+                "title": "Judge",
+                "salary": 0
+            }
+        },
+        "Mayor": {
+            "1": {
+                "title": "Clerk",
+                "salary": 0
+            },
+            "2": {
+                "title": "Mayor",
+                "salary": 0
+            }
+        }
+        
+    }
+}

@@ -78,8 +78,8 @@ end)
 
 AddEventHandler('vorp:setJob', function(player, job, jobgrade)
     local used_char = _getUsedCharacter(player)
-
     if used_char ~= nil then
+        print("Job and grade are valid")
         used_char.setJob(job)
         used_char.setJobGrade(jobgrade)
     end
