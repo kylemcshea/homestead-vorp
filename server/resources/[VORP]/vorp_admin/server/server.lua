@@ -494,7 +494,7 @@ end
 -----------------------------------------------------------------------------------------------------------------
 --PERMISSIONS
 --OPEN MAIN MENU
-RegisterServerEvent('vorp_admin:opneStaffMenu', function(object)
+RegisterServerEvent('vorp_admin:openStaffMenu', function(object)
     local _source = source
     local ace = IsPlayerAceAllowed(_source, object) -- this feature allows to have discord role permissions
     local Character = VorpCore.getUser(_source).getUsedCharacter
@@ -503,10 +503,10 @@ RegisterServerEvent('vorp_admin:opneStaffMenu', function(object)
     local group1 = User.getGroup
     if ace or CheckTable(group, group1, object) then
         Perm = true
-        TriggerClientEvent('vorp_admin:OpenStaffMenu', _source, Perm)
+        TriggerClientEvent('vorp_admin:openStaffMenu', _source, Perm)
     else
         Perm = false
-        TriggerClientEvent('vorp_admin:OpenStaffMenu', _source, Perm)
+        TriggerClientEvent('vorp_admin:openStaffMenu', _source, Perm)
     end
 end)
 

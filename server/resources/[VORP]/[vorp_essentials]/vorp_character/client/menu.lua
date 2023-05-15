@@ -1629,7 +1629,7 @@ local FIRST_NAME_INPUT = {
     placeholder = 'First Name',
     style = "block",
     attributes = {
-        inputHeader = 'Character First Name',
+        inputHeader = 'First Name',
         type = "text",
         pattern = "[A-Za-z ]{1,20}",
         title = T.Inputs.title,
@@ -1643,7 +1643,7 @@ local LAST_NAME_INPUT = {
     placeholder = 'Last Name',
     style = "block",
     attributes = {
-        inputHeader = 'Character Last Name',
+        inputHeader = 'Last Name',
         type = "text",
         pattern = "[A-Za-z ]{1,20}",
         title = T.Inputs.title,
@@ -1659,7 +1659,6 @@ function createCharacterName(cb)
     local closeThread = false
 
     TriggerEvent("vorpinputs:advancedInput", json.encode(FIRST_NAME_INPUT), function(first_name_result)
-        closeThread = true
         local str_result = tostring(first_name_result)
         if (str_result == nil or str_result == "") then
             return cb(nil)
@@ -1671,13 +1670,17 @@ function createCharacterName(cb)
         end
 
         myFirstName = str_result
+        closeThread = true
     end)
 
-    -- waits for first name to be entered
-    -- then opens last name input
+    -- waits for first name to be entered THEN opens last name input
     CreateThread(function()
         while not closeThread do
-            Wait(100)
+            Wait(150)
+        end
+
+        if (myFirstName == nil or myFirstName == "") then
+            return cb(nil)
         end
 
         TriggerEvent("vorpinputs:advancedInput", json.encode(LAST_NAME_INPUT), function(last_name_result)
@@ -1691,7 +1694,7 @@ function createCharacterName(cb)
                 return cb(nil)
             end
 
-            return cb({ 
+            return cb({
                 first_name = myFirstName, 
                 last_name = str_last_name 
             })

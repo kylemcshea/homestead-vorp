@@ -318,11 +318,37 @@ function StartPrompts()
 	end
 end
 
+local function RemoveTagFromMetaPed(ped, category)
+
+    if category == "Pant" then
+        if GetGender() == "female" then
+            PlayerClothing.Skirt = -1
+            Citizen.InvokeNative(0xD710A5007C2AC539, ped, Config.HashList.Skirt, 0)
+        end
+        Citizen.InvokeNative(0xD710A5007C2AC539, ped, Config.HashList.Boots, 0)
+    end
+
+
+    Citizen.InvokeNative(0xD710A5007C2AC539, ped, Config.HashList[category], 0)
+    UpdateVariation(ped)
+    PlayerClothing[category] = -1
+end
+
+local function __ApplyShopItemToPed(ped, comp, category)
+    RemoveTagFromMetaPed(ped, category)
+    Citizen.InvokeNative(0xD3A7B003ED343FD9, ped, comp.hex, true, true, true)
+    UpdateVariation(ped)
+    PlayerClothing[category] = comp.hex
+end
+
 function DefaultPedSetup(ped, male)
 	local compEyes
 	local compBody
 	local compHead
 	local compLegs
+	local compShirt
+	local compPants
+	local compBoots
 
 	if male then
 		Citizen.InvokeNative(0x77FF8D35EEC6BBC4, ped, 0, 0)
@@ -330,22 +356,38 @@ function DefaultPedSetup(ped, male)
 		compBody = tonumber("0x" .. Config.DefaultChar.Male[1].Body[1])
 		compHead = tonumber("0x" .. Config.DefaultChar.Male[1].Heads[1])
 		compLegs = tonumber("0x" .. Config.DefaultChar.Male[1].Legs[1])
+		compShirt = {hash='CLOTHING_ITEM_M_RANCHER_SHIRT_VAR_001',hex=-1903158708}
+		compPants = {hash='CLOTHING_ITEM_M_PANTS_004_TINT_010',hex=-1482231061}
+		compBoots = {hash='',hex=-1050393805}
+		compHair = 1468572749
 	else
 		Citizen.InvokeNative(0x77FF8D35EEC6BBC4, ped, 7, true) -- female sync
 		compEyes = 928002221
 		compBody = tonumber("0x" .. Config.DefaultChar.Female[1].Body[1])
 		compHead = tonumber("0x" .. Config.DefaultChar.Female[1].Heads[1])
 		compLegs = tonumber("0x" .. Config.DefaultChar.Female[1].Legs[1])
+		compShirt = {hash='',hex=-1340580155}
+		compPants = {hash='CLOTHING_ITEM_F_PANTS_004_TINT_010',hex=175439924}
+		compBoots = {hash='',hex=489450736}
+		compHair = 2475770015
 	end
 
 	Citizen.InvokeNative(0x283978A15512B2FE, ped, true)
 	Citizen.InvokeNative(0x77FF8D35EEC6BBC4, ped, 3, 0) -- outfits
 	IsPedReadyToRender()
+	ApplyComponentToPed(ped, compHair)
 	ApplyComponentToPed(ped, compBody)
 	ApplyComponentToPed(ped, compLegs)
 	ApplyComponentToPed(ped, compHead)
 	ApplyComponentToPed(ped, compEyes)
+	
 
+	-- Clothing saving
+	__ApplyShopItemToPed(ped, compShirt, 'Shirt')
+	__ApplyShopItemToPed(ped, compBoots, 'Boots')
+	__ApplyShopItemToPed(ped, compPants, 'Pant')
+
+	PlayerSkin.Hair = compHair
 	PlayerSkin.HeadType = compHead
 	PlayerSkin.BodyType = compBody
 	PlayerSkin.LegsType = compLegs
