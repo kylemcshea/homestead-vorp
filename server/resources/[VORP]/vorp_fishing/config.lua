@@ -262,7 +262,6 @@ Config.BaitsPerFish = {
 }
 
 Config.Lang = {
-
 	ReadyToFish = "Ready to fish!",
     PrepRod = "Prepare Fishing Rod",
     ThrowHook = "Cast Fishing Rod",

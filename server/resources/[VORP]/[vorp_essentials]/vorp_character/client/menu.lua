@@ -146,28 +146,15 @@ function OpenCharCreationMenu(clothingtable)
             end
 
             if (data.current.value == "name") then -- check if it has been built
-                local MyInput = {
-                    type = "enableinput",
-                    inputType = "input",
-                    button = T.Inputs.confirm,
-                    placeholder = T.Inputs.placeholder,
-                    style = "block",
-                    attributes = {
-                        inputHeader = T.Inputs.inputHeader,
-                        type = "text",
-                        pattern = "[A-Za-z ]{5,20}",
-                        title = T.Inputs.title,
-                        style = "border-radius: 10px; background-color: ; border:none;"
-                    }
-                }
-                TriggerEvent("vorpinputs:advancedInput", json.encode(MyInput), function(result)
-                    local Result = tostring(result)
-                    if Result ~= nil and Result ~= "" then
-                        if not __GetName(Result) then
-                            TriggerEvent("vorp:TipRight", T.Inputs.banned, 4000)
-                            return
-                        end
-                        FirstName, LastName = __GetName(Result)
+
+                createCharacterName(function(data)
+                    if not data or data == nil then
+                        TriggerEvent("vorp:TipRight", T.Inputs.banned, 4000)
+                        return
+                    end
+
+                    if data ~= nil and data.first_name ~= nil and data.last_name ~= nil then
+                        FirstName, LastName = data.first_name, data.last_name
 
                         __CHARNAME = FirstName .. " " .. LastName .. imgPath1:format(img2)
                         __DESC = T.MenuCreation.label .. "<br> " .. FirstName .. " " .. LastName
@@ -1633,4 +1620,84 @@ function OpenMakeupMenu(table)
         end, function(data, menu)
 
         end)
+end
+
+local FIRST_NAME_INPUT = {
+    type = "enableinput",
+    inputType = "input",
+    button = T.Inputs.confirm,
+    placeholder = 'First Name',
+    style = "block",
+    attributes = {
+        inputHeader = 'First Name',
+        type = "text",
+        pattern = "[A-Za-z ]{1,20}",
+        title = T.Inputs.title,
+        style = "border-radius: 10px; background-color: ; border:none;"
+    }
+}
+local LAST_NAME_INPUT = {
+    type = "enableinput",
+    inputType = "input",
+    button = T.Inputs.confirm,
+    placeholder = 'Last Name',
+    style = "block",
+    attributes = {
+        inputHeader = 'Last Name',
+        type = "text",
+        pattern = "[A-Za-z ]{1,20}",
+        title = T.Inputs.title,
+        style = "border-radius: 10px; background-color: ; border:none;"
+    }
+}
+
+--- createCharacterName: Creates a character name input
+---@param cb: function
+---@return cb({ first_name: string; last_name: string } | nil)
+function createCharacterName(cb)
+    local myFirstName = ''
+    local closeThread = false
+
+    TriggerEvent("vorpinputs:advancedInput", json.encode(FIRST_NAME_INPUT), function(first_name_result)
+        local str_result = tostring(first_name_result)
+        if (str_result == nil or str_result == "") then
+            return cb(nil)
+        end
+        
+        -- check if first name is empty when replacing spaces with nothing
+        if (str_result:gsub("%s+", "") == "") then
+            return cb(nil)
+        end
+
+        myFirstName = str_result
+        closeThread = true
+    end)
+
+    -- waits for first name to be entered THEN opens last name input
+    CreateThread(function()
+        while not closeThread do
+            Wait(150)
+        end
+
+        if (myFirstName == nil or myFirstName == "") then
+            return cb(nil)
+        end
+
+        TriggerEvent("vorpinputs:advancedInput", json.encode(LAST_NAME_INPUT), function(last_name_result)
+            local str_last_name = tostring(last_name_result)
+            if str_last_name == nil or str_last_name == "" then
+                return cb(nil)
+            end
+
+            -- check if last name is empty when replacing spaces with nothing
+            if (str_last_name:gsub("%s+", "") == "") then
+                return cb(nil)
+            end
+
+            return cb({
+                first_name = myFirstName, 
+                last_name = str_last_name 
+            })
+        end)
+    end)
 end

@@ -11,8 +11,8 @@ Translation.Langs = {
             confirm = "Confirm",
             placeholder = "firstname lastname",
             inputHeader = "CHOOSE CHARACTER NAME",
-            title = "Letters only min 5 max 20",
-            banned = "you cant use those names as they are consider banned in this server"
+            title = "Letters only min 1 max 20",
+            banned = "the selected name is invalid to our county's criteria...",
         },
         MenuCreation = {
             title = "Character Creation",

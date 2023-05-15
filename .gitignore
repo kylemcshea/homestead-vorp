@@ -1,5 +1,6 @@
 **/\[CFX\]/**
 !**/\[CFX\]/README.txt
+**/\[SYN\]/*
 cache
 CFX-files/*
 !CFX-files/DRAG_HERE_ARTIFACTS.txt
@@ -7,4 +8,3 @@ perms.cfg
 server.cfg
 vorp_perms.cfg
 txData
-.replxx_history

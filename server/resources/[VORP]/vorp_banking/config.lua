@@ -128,6 +128,152 @@ Config.banks       = {
         },
 
     },
+    Strawberry = {
+        name = "Strawberry Bank",
+        --x = -1763.7446, y= -380.8514, z= 157.7361,
+        x = -1767.55, y = -381.33, z = 157.73,
+        city = "Strawberry",
+        blipsprite = -2128054417,
+        blipAllowed = true,
+        NpcAllowed = false,
+        NpcModel = "S_M_M_BankClerk_01",
+        Nx = 0.0, Ny = 0.0, Nz = 0.0, Nh = 0.0, --npc positions
+        StoreHoursAllowed = true,
+        StoreOpen = 7, -- am
+        StoreClose = 21, -- pm
+        distOpen = 1.5,
+        gold = false,
+        items = false,
+        upgrade = false,
+        costslot = 10,
+        maxslots = 50,
+
+        --------------------- ONLY 1 MUST BE TRUE or ALL 2 FALSE(no limits in bank)
+        useitemlimit = false, -- if TRUE limit only items above
+        usespecificitem = false, -- if TRUE deposit only items above
+        -----------------------------------------
+
+        itemlist = { 
+            ammorevolvernormal = 3, -- name = count
+            WEAPON_MELEE_KNIFE = 1
+        },
+    },
+    Armadillo = {
+        name = "Armadillo Bank",
+        x = -3666.0981, y= -2626.6882, z= -13.5881,
+        city = "Armadillo",
+        blipsprite = -2128054417,
+        blipAllowed = true,
+        NpcAllowed = true,
+        NpcModel = "S_M_M_BankClerk_01",
+        Nx = -3665.8853, Ny = -2628.6628, Nz = -13.5881, Nh = 8.1651, --npc positions
+        StoreHoursAllowed = true,
+        StoreOpen = 7, -- am
+        StoreClose = 21, -- pm
+        distOpen = 1.5,
+        gold = false,
+        items = false,
+        upgrade = false,
+        costslot = 10,
+        maxslots = 50,
+
+        --------------------- ONLY 1 MUST BE TRUE or ALL 2 FALSE(no limits in bank)
+        useitemlimit = false, -- if TRUE limit only items above
+        usespecificitem = false, -- if TRUE deposit only items above
+        -----------------------------------------
+
+        itemlist = { 
+            ammorevolvernormal = 3, -- name = count
+            WEAPON_MELEE_KNIFE = 1
+        },
+    },
+    VanHorn = {
+        name = "Van Horn Bank",
+        x = 2987.0076, y= 576.2781, z= 44.6190,
+        city = "VanHorn",
+        blipsprite = -2128054417,
+        blipAllowed = true,
+        NpcAllowed = true,
+        NpcModel = "S_M_M_BankClerk_01",
+        Nx = 2987.0879, Ny = 574.6718, Nz = 44.6191, Nh = 351.4911, --npc positions
+        StoreHoursAllowed = true,
+        StoreOpen = 7, -- am
+        StoreClose = 21, -- pm
+        distOpen = 1.5,
+        gold = false,
+        items = false,
+        upgrade = false,
+        costslot = 10,
+        maxslots = 50,
+
+        --------------------- ONLY 1 MUST BE TRUE or ALL 2 FALSE(no limits in bank)
+        useitemlimit = false, -- if TRUE limit only items above
+        usespecificitem = false, -- if TRUE deposit only items above
+        -----------------------------------------
+
+        itemlist = { 
+            ammorevolvernormal = 3, -- name = count
+            WEAPON_MELEE_KNIFE = 1
+        },
+    },
+    Annesburg = {
+        name = "Annesburg Bank",
+        x = 2951.3989, y= 1352.7007, z= 44.8644,
+        city = "Annesburg",
+        blipsprite = -2128054417,
+        blipAllowed = true,
+        NpcAllowed = false,
+        NpcModel = "S_M_M_BankClerk_01",
+        Nx = 2987.0879, Ny = 574.6718, Nz = 44.6191, Nh = 351.4911, --npc positions
+        StoreHoursAllowed = true,
+        StoreOpen = 7, -- am
+        StoreClose = 21, -- pm
+        distOpen = 1.5,
+        gold = false,
+        items = false,
+        upgrade = false,
+        costslot = 10,
+        maxslots = 50,
+
+        --------------------- ONLY 1 MUST BE TRUE or ALL 2 FALSE(no limits in bank)
+        useitemlimit = false, -- if TRUE limit only items above
+        usespecificitem = false, -- if TRUE deposit only items above
+        -----------------------------------------
+
+        itemlist = { 
+            ammorevolvernormal = 3, -- name = count
+            WEAPON_MELEE_KNIFE = 1
+        },
+    },
+    Tumbleweed = {
+        name = "Tumbleweed Bank",
+        x = -5528.0928, y= -2953.0515, z= -0.6965,
+        city = "Tumbleweed",
+        blipsprite = -2128054417,
+        blipAllowed = true,
+        NpcAllowed = false,
+        NpcModel = "S_M_M_BankClerk_01",
+        Nx = 2987.0879, Ny = 574.6718, Nz = 44.6191, Nh = 351.4911, --npc positions
+        StoreHoursAllowed = true,
+        StoreOpen = 7, -- am
+        StoreClose = 21, -- pm
+        distOpen = 1.5,
+        gold = false,
+        items = false,
+        upgrade = false,
+        costslot = 10,
+        maxslots = 50,
+
+        --------------------- ONLY 1 MUST BE TRUE or ALL 2 FALSE(no limits in bank)
+        useitemlimit = false, -- if TRUE limit only items above
+        usespecificitem = false, -- if TRUE deposit only items above
+        -----------------------------------------
+
+        itemlist = { 
+            ammorevolvernormal = 3, -- name = count
+            WEAPON_MELEE_KNIFE = 1
+        },
+    }
 }
 
 Config.Logwithdraw = ""
