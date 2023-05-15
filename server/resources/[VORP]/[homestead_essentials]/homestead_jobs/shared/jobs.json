@@ -3,129 +3,129 @@
         "NativeCraftsman": {
             "1": {
                 "title": "Apprentice",
-                "pay": 0
+                "salary": 0
             },
             "2": {
                 "title": "Craftsman",
-                "pay": 0
+                "salary": 0
             },
             "3": {
                 "title": "Master Craftsman",
-                "pay": 0
+                "salary": 0
             }
         },
         "Gunsmith": {
             "1": {
                 "title": "Apprentice",
-                "pay": 0
+                "salary": 0
             },
             "2": {
                 "title": "Gunsmith",
-                "pay": 0
+                "salary": 0
             },
             "3": {
                 "title": "Master Gunsmith",
-                "pay": 0
+                "salary": 0
             }
         },
         "blacksmith": {
             "1": {
                 "title": "Apprentice",
-                "pay": 0
+                "salary": 0
             },
             "2": {
                 "title": "Gunsmith",
-                "pay": 0
+                "salary": 0
             },
             "3": {
                 "title": "Master Gunsmith",
-                "pay": 0
+                "salary": 0
             }
         },
         "Doctor": {
             "1": {
                 "title": "Student Doctor",
-                "pay": 0
+                "salary": 0
             },
             "2": {
                 "title": "Doctor",
-                "pay": 0
+                "salary": 0
             },
             "3":{
                 "title": "Head Doctor",
-                "pay": 0
+                "salary": 0
             },
             "4": {
                 "title": "Medical Director",
-                "pay": 0
+                "salary": 0
             }
         },
         "Shaman": {
             "1": {
                 "title": "Learning Shaman",
-                "pay": 0
+                "salary": 0
             },
             "2": {
                 "title": "Shaman",
-                "pay": 0
+                "salary": 0
             },
             "3":{
                 "title": "Head Shaman",
-                "pay": 0
+                "salary": 0
             },
             "4": {
                 "title": "High Shaman",
-                "pay": 0
+                "salary": 0
             }
         },
         "Sheriff": {
             "1": {
                 "title": "Deputy Sheriff",
-                "pay": 0
+                "salary": 0
             },
             "2": {
                 "title": "Sheriff",
-                "pay": 0
+                "salary": 0
             }
         },
         "Marshall": {
             "1": {
                 "title": "Deputy Marshall",
-                "pay": 0
+                "salary": 0
             },
             "2": {
                 "title": "Marshall",
-                "pay": 0
+                "salary": 0
             }
         },
         "Courthouse": {
             "1": {
                 "title": "Clerk",
-                "pay": 0
+                "salary": 0
             },
             "2": {
                 "title": "Judge",
-                "pay": 0
+                "salary": 0
             }
         },
         "SupremeCourt": {
             "1": {
                 "title": "Clerk",
-                "pay": 0
+                "salary": 0
             },
             "2": {
                 "title": "Judge",
-                "pay": 0
+                "salary": 0
             }
         },
         "Mayor": {
             "1": {
                 "title": "Clerk",
-                "pay": 0
+                "salary": 0
             },
             "2": {
                 "title": "Mayor",
-                "pay": 0
+                "salary": 0
             }
         }
         

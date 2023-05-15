@@ -4,8 +4,7 @@
             "onduty": {},
             "hired": {
                 "Identifier": {
-                    "Grade": "Jobgrade",
-                    "timeworked": "time" 
+                    "Grade": "Jobgrade"
                 }
             },
             "balance": 0

@@ -21,3 +21,8 @@ files {
     "shared/jobs.json",
     "shared/businesses.json"
 }
+
+server_exports {
+    "validateJob",
+    "validate_job_cb"
+}
