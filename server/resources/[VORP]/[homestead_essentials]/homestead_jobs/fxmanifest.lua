@@ -5,14 +5,6 @@ lua54 'yes'
 description 'A framework for RedM'
 author 'Homestead VORP Dee'
 
-shared_scripts {
-    
-}
-
-client_scripts {
-    'client/*'
-}
-
 server_scripts {
     'server/*'
 }
